@@ -2,14 +2,20 @@ intro1 =
   "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida";
 intro2 =
   "Despues de un buen tiempo caminando y caminando logre ver a lo lejos un castillo gigante y decidi acercarme";
-let textos = [intro1, intro2];
+let textosAr = [intro1, intro2];
 
 let dialogoFrame;
 let textoFrame;
+let sprayPersonaje;
+
+let fondo;
+let personajeOgro;
 
 function setup() {
   createCanvas(1366, 620);
   fondo = loadImage("Assets/Sprites/back-first-escene.jpeg");
+  ObjetoLlave = loadImage("Assets/Sprites/llave.jpeg");
+  personajeOgro = loadImage("Assets/Sprites/ogro.png");
 }
 
 function draw() {
@@ -17,11 +23,14 @@ function draw() {
   firstEscene();
 }
 
-// función de la primera escena
+// Función de la primera escena
 
 function firstEscene() {
-  dialogoFrame = new seccionDialogo(310, 460, 800, 150);
-  textoFrame = new dialogText(textos[0]);
+  dialogoFrame = new seccionDialogo();
+  textoFrame = new dialogTexto(textosAr[1]);
+  sprayPersonaje = new personaje(personajeOgro);
+
+  sprayPersonaje.show();
   dialogoFrame.show();
   textoFrame.show();
 }
@@ -29,38 +38,39 @@ function firstEscene() {
 // Función para cambiar de texto
 
 function mouseClicked() {
-  // for (i = textos; i < 2; i += textos) {
-  if (textoFrame === textos[0]) {
-    textos = textos[1];
+  if (textosAr === intro1) {
+    textosAr = intro2;
   } else {
-    textos = textos[0];
+    textosAr = intro1;
   }
 }
-
 //Clases de dialogo y texto
 
 class seccionDialogo {
-  constructor(x, y, w, h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  }
   show() {
     fill(255, 150);
-    rect(this.x, this.y, this.w, this.h);
+    rect(310, 460, 800, 150);
   }
 }
 
-class dialogText {
+class dialogTexto {
   constructor(texts) {
     this.texts = texts;
   }
   show() {
     fill(0);
     textSize(17);
-    textWrap(CHAR);
+    textAlign(LEFT);
     textStyle(BOLD);
     text(this.texts, 350, 500);
+  }
+}
+
+class personaje {
+  constructor(img) {
+    this.img = img;
+  }
+  show() {
+    image(this.img, 300, 0);
   }
 }
