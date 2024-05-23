@@ -13,7 +13,7 @@ let personajeOgro;
 
 function setup() {
   createCanvas(1366, 620);
-  fondo = loadImage("Assets/Sprites/back-first-escene.jpeg");
+  fondo = loadImage("Assets/Sprites/background-first-escene.jpeg");
   ObjetoLlave = loadImage("Assets/Sprites/llave.jpeg");
   personajeOgro = loadImage("Assets/Sprites/ogro.png");
 }
