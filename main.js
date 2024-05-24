@@ -7,15 +7,17 @@ let textos = [intro1, intro2];
 let dialogoFrame;
 let textoFrame;
 
+
 function setup() {
   createCanvas(1366, 620);
-  fondo = loadImage("Assets/Sprites/back-first-escene.jpeg");
+  fondo = loadImage("Assets/Sprites/forest.jpeg");
 }
 
 function draw() {
   background(fondo);
   firstEscene();
 }
+
 
 // función de la primera escena
 
