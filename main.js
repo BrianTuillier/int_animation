@@ -23,19 +23,35 @@ let eleccionBoton2;
 let textoFrameBoton;
 let textoFrameBoton2;
 
+let song;
+
 // Se declaran las variables que contendran los sprites
 let fondo;
 let personajeOgro;
 
+function preload() {
+  //p5.sound ahh shit
+  soundFormats('wav');
+  song = loadSound('Assets/Bg_sound/forest.wav');
+}
+
+
 // Función para declarar el inicio del programa
 function setup() {
   // Se utiliza la función para crear el canvas donde se mostrara la animación
-  createCanvas(1366, 620);
+  let cnv = createCanvas(1360, 620);
+  cnv.mousePressed(canvapressed)
+
 
   //Declaramos las imágenes que se utilizaran
   fondo = loadImage("Assets/Sprites/forest.jpeg");
   ObjetoLlave = loadImage("Assets/Sprites/llave.jpeg");
   personajeOgro = loadImage("Assets/Sprites/ogro.png");
+}
+
+function canvapressed() {
+  song.play();
+
 }
 
 // Función para declarar que se dibujará por pantalla
@@ -45,7 +61,10 @@ function draw() {
 
   // Llamamos a la función "firstEscene" donde mostrará las primeras animaciones
   firstEscene();
+
+
 }
+
 
 // Función de la primera escena
 function firstEscene() {
@@ -83,6 +102,7 @@ function mouseClicked() {
     textosAr = intro2;
   } else {
     textosAr = intro1;
+
   }
 }
 
