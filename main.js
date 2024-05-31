@@ -1,18 +1,14 @@
 // Se declaran las variables que contienen los dialogos
 
-intro1 =
-  "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida";
-intro2 =
-  "Despues de un buen tiempo caminando y caminando logre ver a lo lejos un castillo gigante y decidi acercarme";
+let intros = [
+  "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida",
+  "Despues de un buen tiempo caminando y caminando logre ver a lo lejos un castillo gigante y decidi acercarme",
+];
+
+let index = 0;
 
 textoBoton1 = "si";
 textoBoton2 = "no";
-
-// Se declara una variable array para contener los dialogos
-let textosAr = [intro1, intro2];
-
-// Se declara una variable array para contener los dialogos de los botones
-let textosBotton = [intro1, intro2];
 
 // Se declaran las variables que almacenaran cada clase que se utilize
 let dialogoFrame;
@@ -23,25 +19,15 @@ let eleccionBoton2;
 let textoFrameBoton;
 let textoFrameBoton2;
 
-let song;
-
 // Se declaran las variables que contendran los sprites
 let fondo;
 let personajeOgro;
 
-function preload() {
-  //p5.sound ahh shit
-  soundFormats('wav');
-  song = loadSound('Assets/Bg_sound/forest.wav');
-}
-
-
 // Función para declarar el inicio del programa
 function setup() {
   // Se utiliza la función para crear el canvas donde se mostrara la animación
-  let cnv = createCanvas(1360, 620);
-  cnv.mousePressed(canvapressed)
-
+  // createCanvas(1360, 620);
+  createCanvas(windowWidth, windowHeight);
 
   //Declaramos las imágenes que se utilizaran
   fondo = loadImage("Assets/Sprites/forest.jpeg");
@@ -49,22 +35,23 @@ function setup() {
   personajeOgro = loadImage("Assets/Sprites/ogro.png");
 }
 
-function canvapressed() {
-  song.play();
-
-}
-
 // Función para declarar que se dibujará por pantalla
 function draw() {
   // Se declara que el background sera la variable "Fondo" el cual contiene la imagen que declaramos
   background(fondo);
-
-  // Llamamos a la función "firstEscene" donde mostrará las primeras animaciones
   firstEscene();
 
-
+  // Llamamos a la función "firstEscene" donde mostrará las primeras animaciones
 }
 
+// Función para cambiar de texto cuando se clickee la pantalla
+
+function mousePressed() {
+  if (index < intros.length) {
+    text(intros[index]);
+    index++;
+  }
+}
 
 // Función de la primera escena
 function firstEscene() {
@@ -74,7 +61,7 @@ function firstEscene() {
   /* Creamos el dialogo de texto a travez de la clase "dialogoTexto", 
   le damos que texto de la variable array que queremos que se muestre dentro de la sección de dialogó
   Declaramos la posición donde queremos que aparezca el texto*/
-  textoFrame = new dialogoTexto(textosAr[0], 350, 500);
+  textoFrame = new dialogoTexto(intros[index], 350, 500);
 
   /* Creamos los botones de opciónes a travez de la clase "botonOpcion",
   Le damos los valores de: posiciión horizontal, posición vertical, ancho y altura.*/
@@ -93,17 +80,6 @@ function firstEscene() {
   eleccionBoton2.show();
   textoFrameBoton.show();
   textoFrameBoton2.show();
-}
-
-// Función para cambiar de texto cuando se clickee la pantalla
-
-function mouseClicked() {
-  if (textosAr === intro1) {
-    textosAr = intro2;
-  } else {
-    textosAr = intro1;
-
-  }
 }
 
 // Se crean las clases para llamarlas y ser reutilizadas cuando queramos, sin necesidad de crear diferentes funciones a cada rato.
