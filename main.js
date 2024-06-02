@@ -1,138 +1,185 @@
 // Se declaran las variables que contienen los dialogos
-
 let intros = [
   "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida",
-  "Despues de un buen tiempo caminando y caminando logre ver a lo lejos un castillo gigante y decidi acercarme",
+  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y de-cidí acercarme",
 ];
 
+let introOpcion = "Seguir camino por la izquierda";
+let introOpcion2 = "Seguir camino por la derecha";
+
+let primeraOpcion = "Te encuentras un objeto raro que podría ser útil";
+let segundaOpcion = "Te encuentras un misterioso camino lleno de luces";
+
 let index = 0;
+let opcionSeleccionada = null;
 
-textoBoton1 = "si";
-textoBoton2 = "no";
-
-// Se declaran las variables que almacenaran cada clase que se utilize
+// Se declaran las variables que almacenarán cada clase que se utilice
 let dialogoFrame;
 let textoFrame;
-let eleccionBoton;
-let sprayPersonaje;
-let eleccionBoton2;
-let textoFrameBoton;
-let textoFrameBoton2;
+let botonIzquierda;
+let botonDerecha;
 
-// Se declaran las variables que contendran los sprites
+// Se declaran las variables que contendrán los sprites
 let fondo;
-let personajeOgro;
+
+// Padding para el texto dentro del rectángulo
+let padding = 20;
 
 // Función para declarar el inicio del programa
 function setup() {
-  // Se utiliza la función para crear el canvas donde se mostrara la animación
-  // createCanvas(1360, 620);
-  createCanvas(windowWidth, windowHeight);
+  // Se utiliza la función para crear el canvas donde se mostrará la animación
+  createCanvas(1360, 620);
 
-  //Declaramos las imágenes que se utilizaran
+  //Declaramos las imágenes que se utilizarán
   fondo = loadImage("Assets/Sprites/forest.jpeg");
-  ObjetoLlave = loadImage("Assets/Sprites/llave.jpeg");
-  personajeOgro = loadImage("Assets/Sprites/ogro.png");
+  fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
+
+  // Inicializamos los botones de opciones, pero no los mostramos aún
+  botonIzquierda = new BotonOpcion(
+    introOpcion,
+    width / 2 - 150,
+    height / 2 - 50,
+    150,
+    50,
+    primeraOpcion
+  );
+  botonDerecha = new BotonOpcion(
+    introOpcion2,
+    width / 2 + 50,
+    height / 2 - 50,
+    150,
+    50,
+    segundaOpcion
+  );
 }
 
-// Función para declarar que se dibujará por pantalla
+// Función para declarar qué se dibujará por pantalla
 function draw() {
-  // Se declara que el background sera la variable "Fondo" el cual contiene la imagen que declaramos
-  background(fondo);
-  firstEscene();
-
-  // Llamamos a la función "firstEscene" donde mostrará las primeras animaciones
-}
-
-// Función para cambiar de texto cuando se clickee la pantalla
-
-function mousePressed() {
+  // Se declara que el background será la variable "fondo" el cual contiene la imagen que declaramos
   if (index < intros.length) {
-    text(intros[index]);
-    index++;
+    background(fondo);
+  } else {
+    background(fondoOpciones);
   }
+  firstEscene();
 }
 
 // Función de la primera escena
 function firstEscene() {
-  // Creamos una sección de dialogo a travez de la clase "secciónDialogo"
-  dialogoFrame = new seccionDialogo();
+  // Creamos una sección de diálogo a través de la clase "seccionDialogo"
+  seccionDialogo();
+  let texto = "";
 
-  /* Creamos el dialogo de texto a travez de la clase "dialogoTexto", 
-  le damos que texto de la variable array que queremos que se muestre dentro de la sección de dialogó
-  Declaramos la posición donde queremos que aparezca el texto*/
-  textoFrame = new dialogoTexto(intros[index], 350, 500);
+  if (index < intros.length) {
+    texto = intros[index];
+  } else if (opcionSeleccionada) {
+  }
 
-  /* Creamos los botones de opciónes a travez de la clase "botonOpcion",
-  Le damos los valores de: posiciión horizontal, posición vertical, ancho y altura.*/
-  eleccionBoton = new botonOpcion(450, 230, 200, 70);
-  eleccionBoton2 = new botonOpcion(700, 230, 200, 70);
+  let lines = texto.split("\n");
+  let maxLines = 4;
 
-  //Creamos denuevo el dialogo de texto a travez de la clase "dialogoTexto" pero esta vez con otra variable array.
-  textoFrameBoton = new dialogoTexto(textoBoton1, 540, 270);
-  textoFrameBoton2 = new dialogoTexto(textoBoton2, 790, 270);
+  if (lines.length > maxLines) {
+    // Solo mostramos las primeras líneas que quepan en el cuadro de diálogo
+    texto = lines.slice(0, maxLines).join("\n");
+  }
 
-  /* En esta parte se llama a cada variable que contenga las clases creadas para utilizar la función "show()"
-  para mostrarlas por  pantalla.*/
-  dialogoFrame.show();
+  textoFrame = new DialogoTexto(texto, 330, 470, 760, 110); // Ajustamos el valor de y y el ancho para incluir padding
   textoFrame.show();
-  eleccionBoton.show();
-  eleccionBoton2.show();
-  textoFrameBoton.show();
-  textoFrameBoton2.show();
+
+  if (index >= intros.length && !opcionSeleccionada) {
+    botonIzquierda.show();
+    botonDerecha.show();
+  } else {
+    botonIzquierda.hide();
+    botonDerecha.hide();
+  }
 }
 
 // Se crean las clases para llamarlas y ser reutilizadas cuando queramos, sin necesidad de crear diferentes funciones a cada rato.
 
-// Se crea la clase "seccionDialogo" que muestra el rectangulo donde se mostrara el texto de dialogo.
-// En este caso no damos a elegir los valores ya que esta sección de dialogo siempre quedará en la misma posición
+// Se crea la clase "seccionDialogo" que muestra el rectángulo donde se mostrará el texto de diálogo.
 class seccionDialogo {
-  show() {
+  constructor() {
     fill(255, 150);
     rect(310, 460, 800, 150);
+  }
+
+  hide() {
+    this.seccionDialogo.hide();
   }
 }
 
 // Se crea la clase "dialogoTexto" que muestra el texto y su posición.
-class dialogoTexto {
-  /* La función constructor sirve para inicializar un objeto de una clase. 
-  En el constructor se asignan los valores iniciales del nuevo objeto. */
-  constructor(texts, x, y) {
+class DialogoTexto {
+  constructor(texts, x, y, w, h) {
     this.texts = texts;
-    this.x = x;
-    this.y = y;
-  }
-
-  // La función "show()" sirve para declarar que objetos en la clase se mostrarán al ser llamadas.
-  show() {
-    fill(0);
-    textSize(17);
-    textAlign(LEFT);
-    textStyle(BOLD);
-    text(this.texts, this.x, this.y);
-  }
-}
-
-// Se crea la clase "personaje" que muestra la imagen de los personajes que apareceran.
-class personaje {
-  constructor(img) {
-    this.img = img;
-  }
-  show() {
-    image(this.img, 300, 0);
-  }
-}
-
-// Se crea la clase "botonOpción" que muestra el boton para la toma de decisiónes.
-class botonOpcion {
-  constructor(x, y, w, h, text) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
   }
+
   show() {
-    fill(255, 150);
-    rect(this.x, this.y, this.w, this.h);
+    fill(0);
+    textSize(17);
+    textAlign(LEFT, TOP);
+    textWrap(CHAR);
+    textStyle(BOLD);
+    text(
+      this.texts,
+      this.x + padding,
+      this.y + padding,
+      this.w - padding * 2,
+      this.h - padding * 2
+    ); // Agregamos padding a los lados
+  }
+}
+
+// Se crea la clase "personaje" que muestra la imagen de los personajes que aparecerán.
+class Personaje {
+  constructor(img) {
+    this.img = img;
+  }
+
+  show() {
+    image(this.img, 300, 0);
+  }
+}
+
+// Se crea la clase "botonOpcion" que muestra el botón para la toma de decisiones.
+class BotonOpcion {
+  constructor(text, x, y, w, h, resultado) {
+    this.text = text;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.resultado = resultado;
+    this.button = createButton(this.text);
+    this.button.position(this.x, this.y);
+    this.button.size(this.w, this.h);
+    this.button.mousePressed(() => this.seleccionarOpcion());
+    this.button.hide();
+  }
+
+  show() {
+    this.button.show();
+  }
+
+  hide() {
+    this.button.hide();
+  }
+
+  seleccionarOpcion() {
+    opcionSeleccionada = this.resultado;
+  }
+}
+
+// Función para cambiar de texto cuando se clickee la pantalla
+function mousePressed() {
+  if (index < intros.length) {
+    index++;
+  } else if (opcionSeleccionada) {
+    opcionSeleccionada = null;
   }
 }
