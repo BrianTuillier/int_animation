@@ -1,7 +1,7 @@
-// Se declaran las variables que contienen los dialogos
+// Se declaran las variables que contienen los diálogos
 let intros = [
   "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida",
-  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y de-cidí acercarme",
+  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y decidí acercarme",
 ];
 
 let introOpcion = "Seguir camino por la izquierda";
@@ -11,7 +11,7 @@ let primeraOpcion = "Te encuentras un objeto raro que podría ser útil";
 let segundaOpcion = "Te encuentras un misterioso camino lleno de luces";
 
 let index = 0;
-let opcionSeleccionada = null;
+let opcionSeleccionada;
 
 // Se declaran las variables que almacenarán cada clase que se utilice
 let dialogoFrame;
@@ -41,14 +41,16 @@ function setup() {
     width / 2 - 200,
     height / 2,
     150,
-    70
+    70,
+    primeraOpcion
   );
   botonDerecha = new BotonOpcion(
     introOpcion2,
     width / 2 + 50,
     height / 2,
     150,
-    70
+    70,
+    segundaOpcion
   );
   dialogoFrame = new SeccionDialogo();
 }
@@ -67,8 +69,10 @@ function draw() {
 // Función de la primera escena
 function firstEscene() {
   // Controlar visibilidad de la sección de diálogo
-  if (index < intros.length || !opcionSeleccionada) {
+  if (index < intros.length || opcionSeleccionada) {
     dialogoFrame.show();
+  } else {
+    dialogoFrame.hide();
   }
 
   // Creamos una sección de diálogo a través de la clase "SeccionDialogo"
@@ -77,16 +81,7 @@ function firstEscene() {
   if (index < intros.length) {
     texto = intros[index];
   } else if (opcionSeleccionada) {
-    // Aquí puedes agregar el código para mostrar el resultado de la opción seleccionada
-    if (opcionSeleccionada == introOpcion) {
-      dialogoFrame.show();
-      texto = primeraOpcion;
-      textoFrame = new DialogoTexto(texto, 330, 470, 760, 110); // Ajustamos el valor de x y y el ancho para incluir padding
-      textoFrame.show();
-    } else {
-      dialogoFrame.show();
-      texto = segundaOpcion;
-    }
+    texto = opcionSeleccionada;
   }
 
   let lines = texto.split("\n");
@@ -119,7 +114,7 @@ class SeccionDialogo {
   }
 
   show() {
-    if (this.visible == true) {
+    if (this.visible) {
       fill(255, 150);
       rect(310, 560, 800, 150);
     }
@@ -193,6 +188,10 @@ class BotonOpcion {
 
   seleccionarOpcion() {
     opcionSeleccionada = this.resultado;
+    dialogoFrame = new SeccionDialogo();
+    textoFrame = new DialogoTexto(opcionSeleccionada, 330, 570, 760, 110);
+    dialogoFrame.show(); // Muestra la nueva sección de diálogo
+    textoFrame.show();
   }
 }
 
@@ -201,6 +200,6 @@ function mousePressed() {
   if (index < intros.length) {
     index++;
   } else if (opcionSeleccionada) {
-    opcionSeleccionada = null;
+    opcionSeleccionada = true;
   }
 }
