@@ -1,7 +1,7 @@
 // Se declaran las variables que contienen los dialogos
 let intros = [
   "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida",
-  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y de-cidí acercarme",
+  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y decidí acercarme",
 ];
 
 let introOpcion = "Seguir camino por la izquierda";
@@ -21,6 +21,7 @@ let botonDerecha;
 
 // Se declaran las variables que contendrán los sprites
 let fondo;
+let fondoOpciones;
 
 // Padding para el texto dentro del rectángulo
 let padding = 20;
@@ -30,7 +31,7 @@ function setup() {
   // Se utiliza la función para crear el canvas donde se mostrará la animación
   createCanvas(1360, 620);
 
-  //Declaramos las imágenes que se utilizarán
+  // Declaramos las imágenes que se utilizarán
   fondo = loadImage("Assets/Sprites/forest.jpeg");
   fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
 
@@ -51,6 +52,7 @@ function setup() {
     50,
     segundaOpcion
   );
+  dialogoFrame = new SeccionDialogo();
 }
 
 // Función para declarar qué se dibujará por pantalla
@@ -66,13 +68,19 @@ function draw() {
 
 // Función de la primera escena
 function firstEscene() {
-  // Creamos una sección de diálogo a través de la clase "seccionDialogo"
-  seccionDialogo();
+  // Controlar visibilidad de la sección de diálogo
+  if (index < intros.length || !opcionSeleccionada) {
+    dialogoFrame.show();
+  }
+
+  // Creamos una sección de diálogo a través de la clase "SeccionDialogo"
   let texto = "";
 
   if (index < intros.length) {
     texto = intros[index];
   } else if (opcionSeleccionada) {
+    // Aquí puedes agregar el código para mostrar el resultado de la opción seleccionada
+    texto = opcionSeleccionada;
   }
 
   let lines = texto.split("\n");
@@ -89,6 +97,7 @@ function firstEscene() {
   if (index >= intros.length && !opcionSeleccionada) {
     botonIzquierda.show();
     botonDerecha.show();
+    dialogoFrame.hide();
   } else {
     botonIzquierda.hide();
     botonDerecha.hide();
@@ -97,19 +106,25 @@ function firstEscene() {
 
 // Se crean las clases para llamarlas y ser reutilizadas cuando queramos, sin necesidad de crear diferentes funciones a cada rato.
 
-// Se crea la clase "seccionDialogo" que muestra el rectángulo donde se mostrará el texto de diálogo.
-class seccionDialogo {
+// Se crea la clase "SeccionDialogo" que muestra el rectángulo donde se mostrará el texto de diálogo.
+class SeccionDialogo {
   constructor() {
-    fill(255, 150);
-    rect(310, 460, 800, 150);
+    this.visible = true;
+  }
+
+  show() {
+    if (this.visible == true) {
+      fill(255, 150);
+      rect(310, 460, 800, 150);
+    }
   }
 
   hide() {
-    this.seccionDialogo.hide();
+    this.visible = false;
   }
 }
 
-// Se crea la clase "dialogoTexto" que muestra el texto y su posición.
+// Se crea la clase "DialogoTexto" que muestra el texto y su posición.
 class DialogoTexto {
   constructor(texts, x, y, w, h) {
     this.texts = texts;
@@ -135,7 +150,7 @@ class DialogoTexto {
   }
 }
 
-// Se crea la clase "personaje" que muestra la imagen de los personajes que aparecerán.
+// Se crea la clase "Personaje" que muestra la imagen de los personajes que aparecerán.
 class Personaje {
   constructor(img) {
     this.img = img;
@@ -146,7 +161,7 @@ class Personaje {
   }
 }
 
-// Se crea la clase "botonOpcion" que muestra el botón para la toma de decisiones.
+// Se crea la clase "BotonOpcion" que muestra el botón para la toma de decisiones.
 class BotonOpcion {
   constructor(text, x, y, w, h, resultado) {
     this.text = text;
