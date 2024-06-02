@@ -1,7 +1,7 @@
 // Se declaran las variables que contienen los dialogos
 let intros = [
   "Estuve divagando un buen rato por este bosque, no encuentro ninguna salida",
-  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y decidí acercarme",
+  "Después de un buen tiempo caminando y caminando logré ver a lo lejos un castillo y de-cidí acercarme",
 ];
 
 let introOpcion = "Seguir camino por la izquierda";
@@ -29,7 +29,7 @@ let padding = 20;
 // Función para declarar el inicio del programa
 function setup() {
   // Se utiliza la función para crear el canvas donde se mostrará la animación
-  createCanvas(1360, 620);
+  createCanvas(1366, 764);
 
   // Declaramos las imágenes que se utilizarán
   fondo = loadImage("Assets/Sprites/forest.jpeg");
@@ -38,19 +38,17 @@ function setup() {
   // Inicializamos los botones de opciones, pero no los mostramos aún
   botonIzquierda = new BotonOpcion(
     introOpcion,
-    width / 2 - 150,
-    height / 2 - 50,
+    width / 2 - 200,
+    height / 2,
     150,
-    50,
-    primeraOpcion
+    70
   );
   botonDerecha = new BotonOpcion(
     introOpcion2,
     width / 2 + 50,
-    height / 2 - 50,
+    height / 2,
     150,
-    50,
-    segundaOpcion
+    70
   );
   dialogoFrame = new SeccionDialogo();
 }
@@ -80,7 +78,15 @@ function firstEscene() {
     texto = intros[index];
   } else if (opcionSeleccionada) {
     // Aquí puedes agregar el código para mostrar el resultado de la opción seleccionada
-    texto = opcionSeleccionada;
+    if (opcionSeleccionada == introOpcion) {
+      dialogoFrame.show();
+      texto = primeraOpcion;
+      textoFrame = new DialogoTexto(texto, 330, 470, 760, 110); // Ajustamos el valor de x y y el ancho para incluir padding
+      textoFrame.show();
+    } else {
+      dialogoFrame.show();
+      texto = segundaOpcion;
+    }
   }
 
   let lines = texto.split("\n");
@@ -91,7 +97,7 @@ function firstEscene() {
     texto = lines.slice(0, maxLines).join("\n");
   }
 
-  textoFrame = new DialogoTexto(texto, 330, 470, 760, 110); // Ajustamos el valor de y y el ancho para incluir padding
+  textoFrame = new DialogoTexto(texto, 330, 570, 760, 110); // Ajustamos el valor de y y el ancho para incluir padding
   textoFrame.show();
 
   if (index >= intros.length && !opcionSeleccionada) {
@@ -115,7 +121,7 @@ class SeccionDialogo {
   show() {
     if (this.visible == true) {
       fill(255, 150);
-      rect(310, 460, 800, 150);
+      rect(310, 560, 800, 150);
     }
   }
 
