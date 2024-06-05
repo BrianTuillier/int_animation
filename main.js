@@ -3,7 +3,7 @@ let intros = [
   "Estuve divagando un buen rato por este bosque",
   "No encuentro ninguna salida",
   "Ni mucho menos ninguna pista de ese castillo",
-  "Dios mío, ¿Por qué debí aceptar este trabajo? No creo que valga la pena arriesgar mi vida por esos 200 pesos que ofrecen de recompensa",
+  "Dios mío, ¿Por qué debí aceptar este trabajo? No creo que valga tanto la pena arriesgar mi vida por 200 pesos que ofrecen de recompensa",
   "Pero bueno, no es que tenga otra cosa que hacer siendo honesto...",
   "...",
   "Después de un buen rato caminando y caminando, encontré un camino marcado en el bosque",
@@ -20,9 +20,9 @@ let segundaOpcion = "Te encuentras un misterioso camino lleno de luces";
 // Variables para controlar el estado de la animación de diálogo
 let index = 0;
 let opcionSeleccionada;
-let fadeOut = false; // Indica si se está realizando la animación de desaparición
-let fadeIn = true; // Indica si se está realizando la animación de aparición
-let fadeAmount = 7; // Controla la velocidad de la animación
+let opacidadDes = false; // Indica si se está realizando la animación de desaparición
+let opacidadApa = true; // Indica si se está realizando la animación de aparición
+let cantidadOpacidad = 30; // Controla la velocidad de la animación
 let opacity = 255; // Controla la opacidad del cuadro de diálogo y el texto
 
 // Variables para las clases que se utilizan
@@ -75,7 +75,7 @@ function draw() {
   } else if (intros[index] === "...") {
     background(0); // Pantalla en negro
   } else {
-    background(fondoOpciones);
+    background(fondo);
   }
 
   // Actualizar la opacidad para manejar las transiciones
@@ -195,6 +195,25 @@ class BotonOpcion {
     this.button.size(this.w, this.h);
     this.button.mousePressed(() => this.seleccionarOpcion());
     this.button.hide();
+
+    this.button.style("display", "inline-block"); // Muestra como bloque en línea
+    this.button.style("text-align", "center"); // Alinea el texto al centro
+    this.button.style("font-size", "16px"); // Cambia el tamaño de fuente
+    this.button.style("font-weight", "bold"); // Aplica negrita al texto
+    this.button.style("color", "black"); // Cambia el color del texto
+    this.button.style("cursor", "pointer"); // Cambia el cursor al pasar sobre el botón
+    this.button.style("border-radius", "6px"); // Añade bordes redondeados
+    this.button.style("border", "none"); // Remueve el borde
+    this.button.style("opacity", "2.0"); // Aplica transparencia al botón (0.0 es completamente transparente, 1.0 es completamente opaco)
+    this.button.style("background-color", "white"); // Cambia el color de fondo
+
+    // Agregar efecto hover
+    this.button.mouseOver(() =>
+      this.button.style("background-color", "rgba(200, 200, 200, 2.0)")
+    );
+    this.button.mouseOut(() =>
+      this.button.style("background-color", "rgba(255,255,255, 2.0)")
+    );
   }
 
   show() {
@@ -216,8 +235,8 @@ class BotonOpcion {
 
 // Función para avanzar el índice con un delay y animación
 function avanzarIndiceConAnimacion() {
-  if (!fadeOut && !fadeIn) {
-    fadeOut = true; // Inicia la animación de desaparición
+  if (!opacidadDes && !opacidadApa) {
+    opacidadDes = true; // Inicia la animación de desaparición
   }
 }
 
@@ -228,23 +247,23 @@ function mousePressed() {
 
 // Función para actualizar la opacidad en cada cuadro
 function updateOpacity() {
-  if (fadeOut) {
+  if (opacidadDes) {
     if (opacity > 0) {
-      opacity -= fadeAmount; // Reducir la opacidad para la animación de desaparición
+      opacity -= cantidadOpacidad; // Reducir la opacidad para la animación de desaparición
     } else {
-      fadeOut = false;
+      opacidadDes = false;
       if (index < intros.length) {
         index++; // Avanzar al siguiente texto
       } else if (opcionSeleccionada) {
         opcionSeleccionada = true;
       }
-      fadeIn = true; // Iniciar la animación de aparición
+      opacidadApa = true; // Iniciar la animación de aparición
     }
-  } else if (fadeIn) {
+  } else if (opacidadApa) {
     if (opacity < 255) {
-      opacity += fadeAmount; // Aumentar la opacidad para la animación de aparición
+      opacity += cantidadOpacidad; // Aumentar la opacidad para la animación de aparición
     } else {
-      fadeIn = false; // Terminar la animación de aparición
+      opacidadApa = false; // Terminar la animación de aparición
     }
   }
 }
