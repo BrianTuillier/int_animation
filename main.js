@@ -29,7 +29,7 @@ let padding = 20;
 // Función para declarar el inicio del programa
 function setup() {
   // Se utiliza la función para crear el canvas donde se mostrará la animación
-  createCanvas(1360, 620);
+  createCanvas(1360, 764);
 
   // Declaramos las imágenes que se utilizarán
   fondo = loadImage("Assets/Sprites/forest.jpeg");
