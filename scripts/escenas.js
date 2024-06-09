@@ -16,19 +16,25 @@ function primeraEscena() {
     textoFrame.setText("");
   }
   if (opcionSeleccionada == primeraOpcion) {
+    dialogoFrame = new SeccionDialogo();
     if (contadorSeg < primeraOpcion.length) {
       texto = primeraOpcion[contadorSeg];
       dialogoFrame.show();
-      textoFrame.show();
       textoFrame.setText(texto);
+      textoFrame.show();
+      botonIzquierda.hide();
+      botonDerecha.hide();
     }
   }
   if (opcionSeleccionada == segundaOpcion) {
+    dialogoFrame = new SeccionDialogo();
     if (contadorSeg < primeraOpcion.length) {
       texto = segundaOpcion[contadorSeg];
       dialogoFrame.show();
-      textoFrame.show();
       textoFrame.setText(texto);
+      textoFrame.show();
+      botonIzquierda.hide();
+      botonDerecha.hide();
     }
   }
 }

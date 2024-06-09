@@ -32,7 +32,7 @@ class DialogoTexto {
   }
 
   show() {
-    fill(0, 200, 0, opacity); // Usar la opacidad para la animación
+    fill(0, opacity); // Usar la opacidad para la animación
     textSize(17);
     textAlign(LEFT, TOP);
     textWrap(CHAR);

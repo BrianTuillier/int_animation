@@ -65,6 +65,10 @@ function draw() {
     } else {
       background(fondo);
     }
+  } else if (contadorSeg < opcionSeleccionada.length) {
+    if (primeraOpcion[contadorSeg] == "...") {
+      background(fondo);
+    }
   } else {
     background(fondo);
   }
