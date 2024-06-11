@@ -28,7 +28,7 @@ function primeraEscena() {
   }
   if (opcionSeleccionada == segundaOpcion) {
     dialogoFrame = new SeccionDialogo();
-    if (contadorSeg < primeraOpcion.length) {
+    if (contadorSeg < segundaOpcion.length) {
       texto = segundaOpcion[contadorSeg];
       dialogoFrame.show();
       textoFrame.setText(texto);
@@ -38,3 +38,13 @@ function primeraEscena() {
     }
   }
 }
+// function segundaEscena() {
+//   let texto = "";
+
+//   if (contadorTercero < introCastillo.length) {
+//     texto = [contadorTercero];
+//     dialogoFrame.show();
+//     textoFrame.setText(texto);
+//     textoFrame.show();
+//   }
+// }

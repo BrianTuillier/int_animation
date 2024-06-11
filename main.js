@@ -17,6 +17,8 @@ let botonDerecha;
 let fondo;
 let fondoOpciones;
 let usarFondoOpciones = false;
+let Llave;
+let usarFondoLlave = false;
 
 // Padding para el texto dentro del rectángulo de diálogo
 let padding = 20;
@@ -29,6 +31,8 @@ function setup() {
   // Cargar las imágenes que se utilizarán
   fondo = loadImage("Assets/Sprites/forest.jpeg");
   fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
+  Llave = loadImage("Assets/Sprites/key-option.jpeg");
+  Castillo = loadImage("Assets/Sprites/castle-away.jpeg");
 
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierda = new BotonOpcion(
@@ -65,13 +69,20 @@ function draw() {
     } else {
       background(fondo);
     }
-  } else if (contadorSeg < opcionSeleccionada.length) {
-    if (primeraOpcion[contadorSeg] == "...") {
+  }
+  if (usarFondoLlave) {
+    background(Llave);
+  } else if (contadorSeg < primeraOpcion.length) {
+    if (primeraOpcion[contadorSeg] === "¿Qué es eso?") {
+      background(Llave);
+      usarFondoLlave = true;
+    } else if (primeraOpcion[contadorSeg] === "...") {
+      background(0);
+    } else {
       background(fondo);
     }
-  } else {
-    background(fondo);
   }
+
   // Actualizar la opacidad para manejar las transiciones
   updateOpacity();
   // Dibujar la escena

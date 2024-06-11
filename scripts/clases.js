@@ -95,6 +95,20 @@ class BotonOpcion {
   }
 }
 
+class imagenes {
+  constructor(img, x, y) {
+    this.img = img;
+    this.x = x;
+    this.y = y;
+  }
+  show() {
+    this.img.show();
+  }
+  hide() {
+    this.img.hide();
+  }
+}
+
 // Función para avanzar el índice con un delay y animación
 function avanzarIndiceConAnimacion() {
   if (!opacidadDes && !opacidadApa) {
@@ -122,6 +136,10 @@ function updateOpacity() {
       ) {
         contadorSeg++;
       }
+      // if (contadorTercero < introCastillo.length) {
+      //   contadorTercero++;
+      // }
+
       opacidadApa = true; // Iniciar la animación de aparición
     }
   } else if (opacidadApa) {
