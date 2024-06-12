@@ -1,6 +1,6 @@
 // Se declaran los Dialogos
 // PRIMERA ESCENA
-let intros = [
+let intro = [
   "Estuve divagando un buen rato por este bosque",
   "No encuentro ninguna salida",
   "Ni mucho menos ninguna pista de ese castillo",
@@ -43,8 +43,6 @@ let introCastillo = [
   "Bueno, no importa, es la hora de la verdad",
   "...",
   "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí",
-];
-let entradaCastillo = [
   "Wow",
   "Mucha clase",
   "Okey, no importa. Tengo que encontrar a la princesa",

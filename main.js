@@ -1,6 +1,7 @@
 // Variables para controlar el estado de la animación de diálogo
 let contador = 0;
 let contadorSeg = 0;
+let contadorTer = 0;
 let opcionSeleccionada = null;
 let opacidadDes = false; // Indica si se está realizando la animación de desaparición
 let opacidadApa = true; // Indica si se está realizando la animación de aparición
@@ -19,6 +20,8 @@ let fondoOpciones;
 let usarFondoOpciones = false;
 let Llave;
 let usarFondoLlave = false;
+let Castillo;
+let usarFondoCastillo = false;
 
 // Padding para el texto dentro del rectángulo de diálogo
 let padding = 20;
@@ -32,7 +35,8 @@ function setup() {
   fondo = loadImage("Assets/Sprites/forest.jpeg");
   fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
   Llave = loadImage("Assets/Sprites/key-option.jpeg");
-  Castillo = loadImage("Assets/Sprites/castle-away.jpeg");
+  CastilloLejos = loadImage("Assets/Sprites/castle-away.jpeg");
+  Castillo = loadImage("Assets/Sprites/castle.jpeg");
 
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierda = new BotonOpcion(
@@ -58,18 +62,34 @@ function setup() {
 // Función que se ejecuta en cada frame
 function draw() {
   // Establecer el fondo dependiendo del estado actual del diálogo
+  // Actualizar la opacidad para manejar las transiciones
+  primerFondo();
+  segundoFondo();
+  tercerFondo();
+  // Dibujar la escena
+
+  updateOpacity();
+  mostrarEscenas();
+}
+
+function primerFondo() {
   if (usarFondoOpciones) {
     background(fondoOpciones);
-  } else if (contador < intros.length) {
-    if (intros[contador] === "El camino se termina dividiendo en 2") {
+  } else if (contador < intro.length) {
+    if (intro[contador] === "El camino se termina dividiendo en 2") {
       background(fondoOpciones);
       usarFondoOpciones = true;
-    } else if (intros[contador] === "...") {
+      console.log("funca fondo opciones");
+    } else if (intro[contador] === "...") {
       background(0); // Pantalla en negro
+      console.log("funca oscuro");
     } else {
       background(fondo);
     }
   }
+}
+
+function segundoFondo() {
   if (usarFondoLlave) {
     background(Llave);
   } else if (contadorSeg < primeraOpcion.length) {
@@ -82,10 +102,18 @@ function draw() {
       background(fondo);
     }
   }
+}
 
-  // Actualizar la opacidad para manejar las transiciones
-  updateOpacity();
-  // Dibujar la escena
-
-  primeraEscena();
+function tercerFondo() {
+  if (usarFondoCastillo) {
+    background(CastilloLejos);
+  } else if (contadorTer < introCastillo.length) {
+    if (introCastillo[contadorTer] === "Wow....") {
+      background(CastilloLejos);
+      usarFondoCastillo = true;
+      console.log("Castillo");
+    } else if (introCastillo[contadorTer] === "...") {
+      background(0);
+    }
+  }
 }

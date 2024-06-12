@@ -1,9 +1,9 @@
 // Función para mostrar la escena
-function primeraEscena() {
+function mostrarEscenas() {
   let texto = "";
 
-  if (contador < intros.length) {
-    texto = intros[contador];
+  if (contador < intro.length) {
+    texto = intro[contador];
     dialogoFrame.show();
     textoFrame.setText(texto);
     textoFrame.show();
@@ -37,14 +37,10 @@ function primeraEscena() {
       botonDerecha.hide();
     }
   }
+  if (contadorTer < introCastillo.length) {
+    texto = introCastillo[contadorTer];
+    dialogoFrame.show();
+    textoFrame.show();
+    textoFrame.setText(texto);
+  }
 }
-// function segundaEscena() {
-//   let texto = "";
-
-//   if (contadorTercero < introCastillo.length) {
-//     texto = [contadorTercero];
-//     dialogoFrame.show();
-//     textoFrame.setText(texto);
-//     textoFrame.show();
-//   }
-// }

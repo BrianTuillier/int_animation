@@ -128,17 +128,17 @@ function updateOpacity() {
       opacity -= cantidadOpacidad; // Reducir la opacidad para la animación de desaparición
     } else {
       opacidadDes = false;
-      if (contador < intros.length) {
+      if (contador < intro.length) {
         contador++; // Avanzar al siguiente texto
       } else if (
         opcionSeleccionada &&
         contadorSeg < opcionSeleccionada.length
       ) {
         contadorSeg++;
+      } else if (contadorTer < introCastillo.length) {
+        contadorTer++;
+        console.log("Empezó desde aca");
       }
-      // if (contadorTercero < introCastillo.length) {
-      //   contadorTercero++;
-      // }
 
       opacidadApa = true; // Iniciar la animación de aparición
     }
