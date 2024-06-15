@@ -20,15 +20,19 @@ let fondoOpciones;
 let usarFondoOpciones = false;
 let Llave;
 let usarFondoLlave = false;
-let Castillo;
+let CastilloLejos;
 let usarFondoCastillo = false;
+let CastilloCerca;
+let usarFondoCastilloCerca = false;
+let Lobby;
+let usarFondoLobby = false;
 
 // Padding para el texto dentro del rectángulo de diálogo
 let padding = 20;
 
 // Función que se ejecuta al inicio del programa
 function setup() {
-  // Se utiliza la función para crear el canvas donde se mostrará la animación
+  // Crear el canvas donde se mostrará la animación
   createCanvas(1360, 764);
 
   // Cargar las imágenes que se utilizarán
@@ -36,8 +40,8 @@ function setup() {
   fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
   Llave = loadImage("Assets/Sprites/key-option.jpeg");
   CastilloLejos = loadImage("Assets/Sprites/castle-away.jpeg");
-  Castillo = loadImage("Assets/Sprites/castle.jpeg");
-
+  CastilloCerca = loadImage("Assets/Sprites/castle.jpeg");
+  Lobby = loadImage("Assets/Sprites/Lobby.jpeg");
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierda = new BotonOpcion(
     introOpcion,
@@ -55,6 +59,22 @@ function setup() {
     70,
     segundaOpcion
   );
+  botonIzquierdaCastillo = new BotonOpcion(
+    introOpcion,
+    width / 2 - 200,
+    height / 2,
+    150,
+    70,
+    castilloOpcion
+  );
+  botonDerechaCastillo = new BotonOpcion(
+    introOpcion2,
+    width / 2 + 50,
+    height / 2,
+    150,
+    70,
+    castilloOpcion2
+  );
   dialogoFrame = new SeccionDialogo();
   textoFrame = new DialogoTexto("", 330, 570, 760, 110);
 }
@@ -63,40 +83,22 @@ function setup() {
 function draw() {
   // Establecer el fondo dependiendo del estado actual del diálogo
   // Actualizar la opacidad para manejar las transiciones
-  primerFondo();
-  segundoFondo();
-  tercerFondo();
-  // Dibujar la escena
+  fondosInicio();
+  fondosCastillo();
 
+  // Dibujar la escena
   updateOpacity();
   mostrarEscenas();
 }
 
-function primerFondo() {
-  if (usarFondoOpciones) {
-    background(fondoOpciones);
-  } else if (contador < intro.length) {
-    if (intro[contador] === "El camino se termina dividiendo en 2") {
-      background(fondoOpciones);
-      usarFondoOpciones = true;
-      console.log("funca fondo opciones");
-    } else if (intro[contador] === "...") {
-      background(0); // Pantalla en negro
-      console.log("funca oscuro");
-    } else {
-      background(fondo);
-    }
-  }
-}
-
-function segundoFondo() {
+// Función para establecer el segundo fondo
+function fondosInicio() {
   if (usarFondoLlave) {
     background(Llave);
   } else if (contadorSeg < primeraOpcion.length) {
     if (primeraOpcion[contadorSeg] === "¿Qué es eso?") {
-      background(Llave);
       usarFondoLlave = true;
-    } else if (primeraOpcion[contadorSeg] === "...") {
+    } else if (intro[contador] === "...") {
       background(0);
     } else {
       background(fondo);
@@ -104,16 +106,32 @@ function segundoFondo() {
   }
 }
 
-function tercerFondo() {
+// Función fara establecer el tercer fondo
+function fondosCastillo() {
   if (usarFondoCastillo) {
     background(CastilloLejos);
-  } else if (contadorTer < introCastillo.length) {
-    if (introCastillo[contadorTer] === "Wow....") {
-      background(CastilloLejos);
-      usarFondoCastillo = true;
-      console.log("Castillo");
-    } else if (introCastillo[contadorTer] === "...") {
-      background(0);
-    }
+  } else if (introCastillo[contadorTer] === "Wow....") {
+    background(CastilloLejos);
+    usarFondoCastillo = true;
+  } else if (primeraOpcion[contadorSeg] === "...") {
+    background(0);
+  }
+  if (usarFondoCastilloCerca) {
+    background(CastilloCerca);
+  } else if (introCastillo[contadorTer] === "Raro que no haya nadie aquí") {
+    usarFondoCastilloCerca = true;
+  }
+  if (introCastillo[contadorTer] === "...") {
+    background(0);
+  } else if (
+    introCastillo[contadorTer] ===
+    "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí"
+  ) {
+    background(0);
+  }
+  if (usarFondoLobby) {
+    background(Lobby);
+  } else if (introCastillo[contadorTer] === "Wow") {
+    usarFondoLobby = true;
   }
 }

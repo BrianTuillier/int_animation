@@ -135,9 +135,8 @@ function updateOpacity() {
         contadorSeg < opcionSeleccionada.length
       ) {
         contadorSeg++;
-      } else if (contadorTer < introCastillo.length) {
+      } else if (opcionSeleccionada && contadorTer < introCastillo.length) {
         contadorTer++;
-        console.log("Empezó desde aca");
       }
 
       opacidadApa = true; // Iniciar la animación de aparición

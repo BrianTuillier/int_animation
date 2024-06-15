@@ -20,8 +20,8 @@ function mostrarEscenas() {
     if (contadorSeg < primeraOpcion.length) {
       texto = primeraOpcion[contadorSeg];
       dialogoFrame.show();
-      textoFrame.setText(texto);
       textoFrame.show();
+      textoFrame.setText(texto);
       botonIzquierda.hide();
       botonDerecha.hide();
     }
@@ -37,10 +37,42 @@ function mostrarEscenas() {
       botonDerecha.hide();
     }
   }
+
+  // Castillo
   if (contadorTer < introCastillo.length) {
     texto = introCastillo[contadorTer];
     dialogoFrame.show();
     textoFrame.show();
     textoFrame.setText(texto);
+    botonIzquierdaCastillo.hide();
+    botonDerechaCastillo.hide();
+  } else if (opcionSeleccionada === false) {
+    dialogoFrame.hide();
+    botonIzquierdaCastillo.show();
+    botonDerechaCastillo.show();
+    textoFrame.setText("");
+    console.log("se estan mostrando los botones");
+  }
+  if (opcionSeleccionada == castilloOpcion) {
+    dialogoFrame = new SeccionDialogo();
+    if (contadorTer < castilloOpcion.length) {
+      texto = castilloOpcion[contadorTer];
+      dialogoFrame.show();
+      textoFrame.show();
+      textoFrame.setText(texto);
+      botonIzquierdaCastillo.hide();
+      botonDerechaCastillo.hide();
+    }
+  }
+  if (opcionSeleccionada == castilloOpcion2) {
+    dialogoFrame = new SeccionDialogo();
+    if (contadorTer < castilloOpcion2.length) {
+      texto = castilloOpcion2[contadorTer];
+      dialogoFrame.show();
+      textoFrame.setText(texto);
+      textoFrame.show();
+      botonIzquierdaCastillo.hide();
+      botonDerechaCastillo.hide();
+    }
   }
 }
