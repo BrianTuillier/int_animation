@@ -55,6 +55,7 @@ function setup() {
 
   fondo = loadImage("Assets/Sprites/forest.jpeg");
   fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
+  fondeLlave = loadImage("Assets/Sprites/key-option.jpeg");
 
   dialogoFrame = new SeccionDialogo();
 }
@@ -131,6 +132,38 @@ function firstEscene() {
     botonIzquierda.hide();
     botonDerecha.hide();
   }
+}
+
+function keyscene() {
+  // Mostrar u ocultar la sección de diálogo según el estado
+  if (index < izquierda.length || opcionSeleccionada) {
+    dialogoFrame.show();
+  } else {
+    dialogoFrame.hide();
+  }
+
+  // Obtener el texto actual del diálogo
+  let texto = "";
+
+  if (index < izquierda.length) {
+    texto = izquierda[index];
+  } else if (opcionSeleccionada) {
+    texto = opcionSeleccionada;
+  }
+
+  // Dividir el texto en líneas y limitar el número de líneas a mostrar
+  let lines = texto.split("\n");
+  let maxLines = 4;
+
+  if (lines.length > maxLines) {
+    // Solo mostrar las primeras líneas que quepan en el cuadro de diálogo
+    texto = lines.slice(0, maxLines).join("\n");
+  }
+
+  // Crear y mostrar el cuadro de texto del diálogo
+  textoFrame = new DialogoTexto(texto, 330, 570, 760, 110);
+  textoFrame.show();
+
 }
 
 class SeccionDialogo {
