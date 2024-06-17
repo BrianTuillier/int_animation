@@ -1,17 +1,14 @@
 // Clase para la sección de diálogo (rectángulo donde se muestra el texto)
-
 class SeccionDialogo {
   constructor() {
     this.visible = true;
   }
-
   show() {
     if (this.visible) {
       fill(255, opacity); // Usar la opacidad para la animación
       rect(310, 560, 800, 150, 5);
     }
   }
-
   hide() {
     this.visible = false;
   }
@@ -30,20 +27,12 @@ class DialogoTexto {
   setText(texts) {
     this.texts = texts;
   }
-
   show() {
     fill(0, opacity); // Usar la opacidad para la animación
     textSize(17);
     textAlign(LEFT, TOP);
-    textWrap(CHAR);
     textStyle(BOLD);
-    text(
-      this.texts,
-      this.x + padding,
-      this.y + padding,
-      this.w - padding * 2,
-      this.h - padding * 2
-    ); // Agregar padding a los lados
+    text(this.texts, this.x + padding, this.y + padding, this.w - padding * 2); // Agregar padding a los lados
   }
 }
 
@@ -60,16 +49,15 @@ class BotonOpcion {
     this.button.position(this.x, this.y);
     this.button.size(this.w, this.h);
     this.button.mousePressed(() => this.seleccionarOpcion());
-    this.button.hide();
 
+    // Estilos del boton
     this.button.style("display", "inline-block"); // Muestra como bloque en línea
     this.button.style("text-align", "center"); // Alinea el texto al centro
+    this.button.style("color", "black"); // Cambia el color del texto
     this.button.style("font-size", "16px"); // Cambia el tamaño de fuente
     this.button.style("font-weight", "bold"); // Aplica negrita al texto
-    this.button.style("color", "black"); // Cambia el color del texto
     this.button.style("cursor", "pointer"); // Cambia el cursor al pasar sobre el botón
     this.button.style("border-radius", "6px"); // Añade bordes redondeados
-    this.button.style("border", "none"); // Remueve el borde
     this.button.style("opacity", "0.9 "); // Aplica transparencia al botón (0.0 es completamente transparente, 1.0 es completamente opaco)
     this.button.style("background-color", "white"); // Cambia el color de fondo
 
@@ -95,30 +83,16 @@ class BotonOpcion {
   }
 }
 
-class imagenes {
-  constructor(img, x, y) {
-    this.img = img;
-    this.x = x;
-    this.y = y;
-  }
-  show() {
-    this.img.show();
-  }
-  hide() {
-    this.img.hide();
-  }
+// Función para cambiar de texto cuando se clickee la pantalla
+function mouseClicked() {
+  avanzarIndiceConAnimacion(); // Avanzar el índice con animación al hacer clic
 }
 
 // Función para avanzar el índice con un delay y animación
 function avanzarIndiceConAnimacion() {
-  if (!opacidadDes && !opacidadApa) {
+  if (!opacidadDes) {
     opacidadDes = true; // Inicia la animación de desaparición
   }
-}
-
-// Función para cambiar de texto cuando se clickee la pantalla
-function mouseClicked() {
-  avanzarIndiceConAnimacion(); // Avanzar el índice con animación al hacer clic
 }
 
 // Función para actualizar la opacidad en cada cuadro
@@ -135,8 +109,18 @@ function updateOpacity() {
         contadorSeg < opcionSeleccionada.length
       ) {
         contadorSeg++;
-      } else if (opcionSeleccionada && contadorTer < introCastillo.length) {
+      } else if (
+        opcionSeleccionada &&
+        contadorSeg > opcionSeleccionada.length
+      ) {
+        opcionSeleccionada = false;
+      } else if (contadorTer < introCastillo.length) {
         contadorTer++;
+      } else if (
+        opcionSeleccionada &&
+        contadorTer < opcionSeleccionada.length
+      ) {
+        contadorCuar++;
       }
 
       opacidadApa = true; // Iniciar la animación de aparición

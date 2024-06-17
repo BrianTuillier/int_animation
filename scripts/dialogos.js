@@ -85,3 +85,5 @@ let opcionCastillo = [
   "¿S-S-SE...",
   "¿¿¿¿¿SE ACABA DE ABRIR UNA JAULA?????",
 ];
+
+let opcionCastillo2 = ["opciomn derecha jajaja"];

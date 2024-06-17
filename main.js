@@ -2,6 +2,7 @@
 let contador = 0;
 let contadorSeg = 0;
 let contadorTer = 0;
+let contadorCuar = 0;
 let opcionSeleccionada = null;
 let opacidadDes = false; // Indica si se está realizando la animación de desaparición
 let opacidadApa = true; // Indica si se está realizando la animación de aparición
@@ -13,6 +14,11 @@ let dialogoFrame;
 let textoFrame;
 let botonIzquierda;
 let botonDerecha;
+let botonIzquierdaCastillo;
+let botonDerechaCastillo;
+
+// Padding para el texto dentro del rectángulo de diálogo
+let padding = 20;
 
 // Variables para las imágenes de fondo
 let fondo;
@@ -27,8 +33,7 @@ let usarFondoCastilloCerca = false;
 let Lobby;
 let usarFondoLobby = false;
 
-// Padding para el texto dentro del rectángulo de diálogo
-let padding = 20;
+let cancionBosque;
 
 // Función que se ejecuta al inicio del programa
 function setup() {
@@ -42,6 +47,10 @@ function setup() {
   CastilloLejos = loadImage("Assets/Sprites/castle-away.jpeg");
   CastilloCerca = loadImage("Assets/Sprites/castle.jpeg");
   Lobby = loadImage("Assets/Sprites/Lobby.jpeg");
+
+  // Musicas de fondos
+  cancionBosque = loadSound("Assets/Bg_sound/Forest.wav");
+
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierda = new BotonOpcion(
     introOpcion,
@@ -60,20 +69,20 @@ function setup() {
     segundaOpcion
   );
   botonIzquierdaCastillo = new BotonOpcion(
-    introOpcion,
+    castilloOpcion,
     width / 2 - 200,
     height / 2,
     150,
     70,
-    castilloOpcion
+    opcionCastillo
   );
   botonDerechaCastillo = new BotonOpcion(
-    introOpcion2,
+    castilloOpcion2,
     width / 2 + 50,
     height / 2,
     150,
     70,
-    castilloOpcion2
+    opcionCastillo2
   );
   dialogoFrame = new SeccionDialogo();
   textoFrame = new DialogoTexto("", 330, 570, 760, 110);
@@ -88,7 +97,8 @@ function draw() {
 
   // Dibujar la escena
   updateOpacity();
-  mostrarEscenas();
+  mostrarEscena();
+  mostrarEscena2();
 }
 
 // Función para establecer el segundo fondo
@@ -98,10 +108,18 @@ function fondosInicio() {
   } else if (contadorSeg < primeraOpcion.length) {
     if (primeraOpcion[contadorSeg] === "¿Qué es eso?") {
       usarFondoLlave = true;
+      usarFondoOpciones = false;
     } else if (intro[contador] === "...") {
       background(0);
     } else {
       background(fondo);
+    }
+    if (usarFondoOpciones) {
+      background(fondoOpciones);
+    } else if (contador < intro.length) {
+      if (intro[contador] === "El camino se termina dividiendo en 2") {
+        usarFondoOpciones = true;
+      }
     }
   }
 }
@@ -128,6 +146,8 @@ function fondosCastillo() {
     "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí"
   ) {
     background(0);
+  } else if (introCastillo[contadorTer] === "¿Por donde voy?") {
+    console.log("Aca temrminó el texto");
   }
   if (usarFondoLobby) {
     background(Lobby);
