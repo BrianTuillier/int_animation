@@ -48,7 +48,7 @@ class BotonOpcion {
     this.button = createButton(this.text);
     this.button.position(this.x, this.y);
     this.button.size(this.w, this.h);
-    this.button.mousePressed(() => this.seleccionarOpcion());
+    this.button.mouseClicked(() => this.seleccionarOpcion());
 
     // Estilos del boton
     this.button.style("display", "inline-block"); // Muestra como bloque en línea
@@ -82,10 +82,53 @@ class BotonOpcion {
     opcionSeleccionada = this.resultado;
   }
 }
+class BotonOpcionSegundo {
+  constructor(text, x, y, w, h, resultado) {
+    this.text = text;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.resultado = resultado;
+    this.button = createButton(this.text);
+    this.button.position(this.x, this.y);
+    this.button.size(this.w, this.h);
+    // this.button.mousePressed(() => this.seleccionarOpcion());
+    this.button.mousePressed((this.x = 100));
 
-// Función para cambiar de texto cuando se clickee la pantalla
+    this.button.style("display", "inline-block");
+    this.button.style("text-align", "center");
+    this.button.style("color", "black");
+    this.button.style("font-size", "16px");
+    this.button.style("font-weight", "bold");
+    this.button.style("cursor", "pointer");
+    this.button.style("border-radius", "6px");
+    this.button.style("opacity", "0.9");
+    this.button.style("background-color", "white");
+
+    this.button.mouseOver(() =>
+      this.button.style("background-color", "rgba(200, 200, 200, 1.0)")
+    );
+    this.button.mouseOut(() =>
+      this.button.style("background-color", "rgba(255,255,255, 1.0)")
+    );
+  }
+
+  show() {
+    this.button.show();
+  }
+
+  hide() {
+    this.button.hide();
+  }
+
+  seleccionarOpcion() {
+    opcionSeleccionada2 = this.resultado;
+  }
+}
+
 function mouseClicked() {
-  avanzarIndiceConAnimacion(); // Avanzar el índice con animación al hacer clic
+  avanzarIndiceConAnimacion();
 }
 
 // Función para avanzar el índice con un delay y animación
@@ -103,24 +146,20 @@ function updateOpacity() {
     } else {
       opacidadDes = false;
       if (contador < intro.length) {
-        contador++; // Avanzar al siguiente texto
+        contador++;
       } else if (
         opcionSeleccionada &&
         contadorSeg < opcionSeleccionada.length
       ) {
         contadorSeg++;
-      } else if (
-        opcionSeleccionada &&
-        contadorSeg > opcionSeleccionada.length
-      ) {
-        opcionSeleccionada = false;
       } else if (contadorTer < introCastillo.length) {
         contadorTer++;
       } else if (
-        opcionSeleccionada &&
-        contadorTer < opcionSeleccionada.length
+        opcionSeleccionada2 &&
+        contadorCuar < opcionSeleccionada2.length
       ) {
         contadorCuar++;
+        console.log("contador cuarto funcionando");
       }
 
       opacidadApa = true; // Iniciar la animación de aparición

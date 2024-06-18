@@ -4,6 +4,7 @@ let contadorSeg = 0;
 let contadorTer = 0;
 let contadorCuar = 0;
 let opcionSeleccionada = null;
+let opcionSeleccionada2 = null;
 let opacidadDes = false; // Indica si se está realizando la animación de desaparición
 let opacidadApa = true; // Indica si se está realizando la animación de aparición
 let cantidadOpacidad = 30; // Controla la velocidad de la animación
@@ -21,7 +22,7 @@ let botonDerechaCastillo;
 let padding = 20;
 
 // Variables para las imágenes de fondo
-let fondo;
+let fondoBosque;
 let fondoOpciones;
 let usarFondoOpciones = false;
 let Llave;
@@ -41,7 +42,7 @@ function setup() {
   createCanvas(1360, 764);
 
   // Cargar las imágenes que se utilizarán
-  fondo = loadImage("Assets/Sprites/forest.jpeg");
+  fondoBosque = loadImage("Assets/Sprites/forest.jpeg");
   fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
   Llave = loadImage("Assets/Sprites/key-option.jpeg");
   CastilloLejos = loadImage("Assets/Sprites/castle-away.jpeg");
@@ -68,7 +69,7 @@ function setup() {
     70,
     segundaOpcion
   );
-  botonIzquierdaCastillo = new BotonOpcion(
+  botonIzquierdaCastillo = new BotonOpcionSegundo(
     castilloOpcion,
     width / 2 - 200,
     height / 2,
@@ -76,7 +77,7 @@ function setup() {
     70,
     opcionCastillo
   );
-  botonDerechaCastillo = new BotonOpcion(
+  botonDerechaCastillo = new BotonOpcionSegundo(
     castilloOpcion2,
     width / 2 + 50,
     height / 2,
@@ -98,7 +99,7 @@ function draw() {
   // Dibujar la escena
   updateOpacity();
   mostrarEscena();
-  mostrarEscena2();
+  mostrarEscenaCastillo();
 }
 
 // Función para establecer el segundo fondo
@@ -112,7 +113,7 @@ function fondosInicio() {
     } else if (intro[contador] === "...") {
       background(0);
     } else {
-      background(fondo);
+      background(fondoBosque);
     }
     if (usarFondoOpciones) {
       background(fondoOpciones);
