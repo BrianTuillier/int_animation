@@ -50,34 +50,32 @@ function mostrarEscenaCastillo() {
     botonIzquierdaCastillo.hide();
     botonDerechaCastillo.hide();
   } else if (opcionSeleccionada2 === null) {
-    dialogoFrame.hide();
     botonIzquierdaCastillo.show();
     botonDerechaCastillo.show();
+    dialogoFrame.hide();
     textoFrame.setText("");
   }
 
   // Mostrar opciones del castillo basadas en la opción seleccionada
-  if (opcionSeleccionada2 === castilloOpcion) {
-    if (contadorCuar < castilloOpcion.length) {
+  if (opcionSeleccionada2 == opcionCastillo) {
+    if (contadorCuar < opcionCastillo.length) {
       dialogoFrame = new SeccionDialogo();
-      texto = castilloOpcion[contadorCuar];
+      texto = opcionCastillo[contadorCuar];
       dialogoFrame.show();
       textoFrame.show();
       textoFrame.setText(texto);
-      botonDerechaCastillo.hide();
       botonIzquierdaCastillo.hide();
-      console.log("Opcion primera ejecutandose");
+      botonDerechaCastillo.hide();
     }
-  } else if (opcionSeleccionada2 == castilloOpcion2) {
-    if (contadorCuar < castilloOpcion2.length) {
+  } else if (opcionSeleccionada2 == opcionCastillo2) {
+    if (contadorCuar < opcionCastillo2.length) {
       dialogoFrame = new SeccionDialogo();
-      texto = castilloOpcion2[contadorCuar];
+      texto = opcionCastillo2[contadorCuar];
       dialogoFrame.show();
-      textoFrame.setText(texto);
       textoFrame.show();
+      textoFrame.setText(texto);
       botonIzquierdaCastillo.hide();
       botonDerechaCastillo.hide();
-      console.log("Opcion  segunda");
     }
   }
 }

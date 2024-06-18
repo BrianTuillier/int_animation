@@ -48,7 +48,7 @@ class BotonOpcion {
     this.button = createButton(this.text);
     this.button.position(this.x, this.y);
     this.button.size(this.w, this.h);
-    this.button.mouseClicked(() => this.seleccionarOpcion());
+    this.button.mousePressed(() => this.seleccionarOpcion());
 
     // Estilos del boton
     this.button.style("display", "inline-block"); // Muestra como bloque en línea
@@ -93,8 +93,7 @@ class BotonOpcionSegundo {
     this.button = createButton(this.text);
     this.button.position(this.x, this.y);
     this.button.size(this.w, this.h);
-    // this.button.mousePressed(() => this.seleccionarOpcion());
-    this.button.mousePressed((this.x = 100));
+    this.button.mousePressed(() => this.seleccionarOpcion());
 
     this.button.style("display", "inline-block");
     this.button.style("text-align", "center");
