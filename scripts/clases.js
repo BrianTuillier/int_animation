@@ -158,7 +158,10 @@ function updateOpacity() {
         contadorCuar < opcionSeleccionada2.length
       ) {
         contadorCuar++;
-        console.log("contador cuarto funcionando");
+      } else if (contadorQuin < opcionTieneLlave.length) {
+        contadorQuin++;
+      } else if (contadorQuin < opcionNoLlave.length) {
+        contadorQuin++;
       }
 
       opacidadApa = true; // Iniciar la animación de aparición

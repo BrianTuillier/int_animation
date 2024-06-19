@@ -1,81 +1,190 @@
-function mostrarEscena() {
-  let texto = "";
-  // Mostrar intro o los botones según el valor del contador
-  if (contador < intro.length) {
-    texto = intro[contador];
-    dialogoFrame.show();
-    textoFrame.show();
-    textoFrame.setText(texto);
-    botonIzquierda.hide();
-    botonDerecha.hide();
-  } else if (opcionSeleccionada === null) {
-    dialogoFrame.hide();
-    botonIzquierda.show();
-    botonDerecha.show();
-    textoFrame.setText("");
-  }
-  // Mostrar opciones basadas en la opción seleccionada
-  if (opcionSeleccionada == primeraOpcion) {
-    if (contadorSeg < primeraOpcion.length) {
-      dialogoFrame = new SeccionDialogo();
-      texto = primeraOpcion[contadorSeg];
-      dialogoFrame.show();
-      textoFrame.show();
-      textoFrame.setText(texto);
-      botonIzquierda.hide();
-      botonDerecha.hide();
+// Variables para controlar el estado de la animación de diálogo
+let contador = 0;
+let contadorSeg = 0;
+let contadorTer = 0;
+let contadorCuar = 0;
+let contadorQuin = 0;
+let opcionSeleccionada = null;
+let opcionSeleccionada2 = null;
+let opacidadDes = false; // Indica si se está realizando la animación de desaparición
+let opacidadApa = true; // Indica si se está realizando la animación de aparición
+let cantidadOpacidad = 30; // Controla la velocidad de la animación
+let opacity = 200; // Controla la opacidad del cuadro de diálogo y el texto
+
+// Variables para las clases que se utilizan
+let dialogoFrame;
+let textoFrame;
+let botonIzquierda;
+let botonDerecha;
+let botonIzquierdaCastillo;
+let botonDerechaCastillo;
+
+// Padding para el texto dentro del rectángulo de diálogo
+let padding = 20;
+
+// Variables para las imágenes de fondo
+let fondoBosque;
+let fondoOpciones;
+let usarFondoOpciones = false;
+let Llave;
+let usarFondoLlave = false;
+let CastilloLejos;
+let usarFondoCastillo = false;
+let CastilloCerca;
+let usarFondoCastilloCerca = false;
+let Lobby;
+let usarFondoLobby = false;
+let Escaleras;
+let usarFondoEscaleras;
+let UsarFondoOscuro = false;
+let Pasillo;
+let usarFondoPasillo = false;
+
+let tieneLlave = false;
+
+let cancionBosque;
+
+// Función que se ejecuta al inicio del programa
+function setup() {
+  // Crear el canvas donde se mostrará la animación
+  createCanvas(1360, 764);
+
+  // Cargar las imágenes que se utilizarán
+  fondoBosque = loadImage("Assets/Sprites/forest.jpeg");
+  fondoOpciones = loadImage("Assets/Sprites/options.jpeg");
+  Llave = loadImage("Assets/Sprites/key-option.jpeg");
+  CastilloLejos = loadImage("Assets/Sprites/castle-away.jpeg");
+  CastilloCerca = loadImage("Assets/Sprites/castle.jpeg");
+  Lobby = loadImage("Assets/Sprites/Lobby.jpeg");
+  Pasillo = loadImage("Assets/Sprites/hall.jpeg");
+  Escaleras = loadImage("Assets/Sprites/upstairs.jpeg");
+  // Musicas de fondos
+  cancionBosque = loadSound("Assets/Bg_sound/Forest.wav");
+
+  // Inicializar los botones de opciones, pero no mostrarlos aún
+  botonIzquierda = new BotonOpcion(
+    introOpcion,
+    width / 2 - 200,
+    height / 2,
+    150,
+    70,
+    primeraOpcion
+  );
+  botonDerecha = new BotonOpcion(
+    introOpcion2,
+    width / 2 + 50,
+    height / 2,
+    150,
+    70,
+    segundaOpcion
+  );
+  botonIzquierdaCastillo = new BotonOpcionSegundo(
+    castilloOpcion,
+    width / 2 - 200,
+    height / 2,
+    150,
+    70,
+    opcionCastillo
+  );
+  botonDerechaCastillo = new BotonOpcionSegundo(
+    castilloOpcion2,
+    width / 2 + 50,
+    height / 2,
+    150,
+    70,
+    opcionCastillo2
+  );
+  dialogoFrame = new SeccionDialogo();
+  textoFrame = new DialogoTexto("", 330, 570, 760, 110);
+}
+
+// Función que se ejecuta en cada frame
+function draw() {
+  // Establecer el fondo dependiendo del estado actual del diálogo
+  // Actualizar la opacidad para manejar las transiciones
+  fondosInicio();
+  fondosCastillo();
+  fondoLobby();
+
+  // Dibujar la escena
+  updateOpacity();
+  mostrarEscena();
+  mostrarEscenaCastillo();
+}
+
+// Función para establecer el segundo fondo
+function fondosInicio() {
+  if (usarFondoLlave) {
+    background(Llave);
+  } else if (contadorSeg < primeraOpcion.length) {
+    if (primeraOpcion[contadorSeg] === "¿Qué es eso?") {
+      usarFondoLlave = true;
+      usarFondoOpciones = false;
+    } else if (intro[contador] === "...") {
+      background(0);
+    } else {
+      background(fondoBosque);
     }
-  } else if (opcionSeleccionada == segundaOpcion) {
-    if (contadorSeg < segundaOpcion.length) {
-      dialogoFrame = new SeccionDialogo();
-      texto = segundaOpcion[contadorSeg];
-      dialogoFrame.show();
-      textoFrame.show();
-      textoFrame.setText(texto);
-      botonIzquierda.hide();
-      botonDerecha.hide();
+    if (usarFondoOpciones) {
+      background(fondoOpciones);
+    } else if (contador < intro.length) {
+      if (intro[contador] === "El camino se termina dividiendo en 2") {
+        usarFondoOpciones = true;
+      }
     }
   }
 }
 
-function mostrarEscenaCastillo() {
-  texto = "";
+// Función fara establecer el tercer fondo
 
-  // Mostrar intro del castillo o los botones según el valor del contador
-  if (contadorTer < introCastillo.length) {
-    texto = introCastillo[contadorTer];
-    dialogoFrame.show();
-    textoFrame.show();
-    textoFrame.setText(texto);
-    botonIzquierdaCastillo.hide();
-    botonDerechaCastillo.hide();
-  } else if (opcionSeleccionada2 === null) {
-    botonIzquierdaCastillo.show();
-    botonDerechaCastillo.show();
-    dialogoFrame.hide();
-    textoFrame.setText("");
+function fondosCastillo() {
+  if (usarFondoCastillo) {
+    background(CastilloLejos);
+  } else if (primeraOpcion[contadorSeg] === "...") {
+    background(0);
+  } else if (introCastillo[contadorTer] === "Wow....") {
+    background(CastilloLejos);
+    usarFondoCastillo = true;
   }
+  if (usarFondoCastilloCerca) {
+    background(CastilloCerca);
+  } else if (introCastillo[contadorTer] === "Raro que no haya nadie aquí") {
+    usarFondoCastilloCerca = true;
+  }
+  if (introCastillo[contadorTer] === "...") {
+    background(0);
+  } else if (
+    introCastillo[contadorTer] ===
+    "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí"
+  ) {
+    background(0);
+  } else if (introCastillo[contadorTer] === "¿Por donde voy?") {
+  }
+  if (usarFondoLobby) {
+    background(Lobby);
+  } else if (introCastillo[contadorTer] === "Wow") {
+    usarFondoLobby = true;
+  }
+}
 
-  // Mostrar opciones del castillo basadas en la opción seleccionada
-  if (opcionSeleccionada2 == opcionCastillo) {
-    if (contadorCuar < opcionCastillo.length) {
-      dialogoFrame = new SeccionDialogo();
-      texto = opcionCastillo[contadorCuar];
-      dialogoFrame.show();
-      textoFrame.show();
-      textoFrame.setText(texto);
-      botonIzquierdaCastillo.hide();
-      botonDerechaCastillo.hide();
-    }
-  } else if (opcionSeleccionada2 == opcionCastillo2) {
-    if (contadorCuar < opcionCastillo2.length) {
-      dialogoFrame = new SeccionDialogo();
-      texto = opcionCastillo2[contadorCuar];
-      dialogoFrame.show();
-      textoFrame.show();
-      textoFrame.setText(texto);
-      botonIzquierdaCastillo.hide();
-      botonDerechaCastillo.hide();
+function fondoLobby() {
+  if (UsarFondoOscuro) {
+    background(0);
+  } else if (contadorCuar < opcionCastillo.length) {
+  }
+  if (opcionCastillo[contadorCuar] === "...") {
+    UsarFondoOscuro = true;
+  }
+  if (usarFondoPasillo) {
+    background(Pasillo);
+  } else if (opcionCastillo[contadorCuar] === "Oooooookey????") {
+    usarFondoPasillo = true;
+  } else if (usarFondoEscaleras) {
+    background(Escaleras);
+  }
+  if (contadorCuar < opcionCastillo2.length) {
+    if (opcionCastillo2[contadorCuar] === "¿Una escalera?") {
+      usarFondoEscaleras = true;
     }
   }
 }

@@ -58,13 +58,13 @@ let castilloOpcion = "A ver qué onda";
 let castilloOpcion2 = "Me mando por aca ya fue";
 
 let opcionCastillo = [
-  "...",
-  "Esto está muy oscuro",
-  "...",
+  ".",
   "...",
   "...",
+
   "Oh",
   "Esa zona está iluminada",
+  "...",
   "Oooooookey????",
   "¿Qué se supone que es este lugar?",
   "Me da escalofríos...",
@@ -74,9 +74,7 @@ let opcionCastillo = [
   "Si no, debería volver a estar a ciegas allá atrás...",
   "No...eso no terminará muy bien...",
   "Mejor me mando",
-  "...",
   "Esto está feo",
-  "...",
   "Me siento observando",
   "Muy observado diría yo",
   "!?",
@@ -86,4 +84,49 @@ let opcionCastillo = [
   "¿¿¿¿¿SE ACABA DE ABRIR UNA JAULA?????",
 ];
 
-let opcionCastillo2 = ["opciomn derecha jajaja"];
+let opcionCastillo2 = [
+  "¿Mhm?",
+  "¿Una escalera?",
+  "Bueno, esto cumple con lo de 'suelen estar en la parte más alta', tiene sentido",
+  "Toca subir (que paja)",
+  "Ufffff",
+  "Por fin",
+  "Dios míoo por qué hay tantas escaleras...",
+  "¿Quién diseñó esta mrd?",
+  "Bueno, no importa ¿Qué rayos es esto?",
+  "Una jaula",
+  "Y me imagino que estará cerrada verdad?",
+  "Seh",
+  "Qué conveniente...",
+  "Bueno ¿Qué hago ahora?",
+];
+
+let opcionNoLlave = [
+  "Creo que no me queda otra que buscar otro camino",
+  "Debería volver atrás, capaz el camino izquierdo tenga otra escalera",
+  "¿Eh?",
+  "¿Algo está subiendo las escaleras?",
+  "EH??",
+  "QUÉ",
+  "QUÉ ES ESO",
+  "Amiiiiiigo",
+  "¿Sos feo a propósito o es natural?",
+  "Hay que pedirlo",
+  "...",
+  "EH",
+  "PARÁ ERA JODA BLDO",
+  "NOOOOOO",
+];
+
+let opcionTieneLlave = [
+  "AH",
+  "CLARO",
+  "LA LLAVE",
+  "¿Servirá? Tiene pinta",
+  "A ver...",
+  "SÍ, FUNCIONÓ",
+  "Sabía que serviría de algo",
+  "Nostradamus un poroto",
+  "Abro la puerta suavemente...",
+  "dea",
+];

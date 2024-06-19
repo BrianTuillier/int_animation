@@ -77,5 +77,27 @@ function mostrarEscenaCastillo() {
       botonIzquierdaCastillo.hide();
       botonDerechaCastillo.hide();
     }
+    if (opcionSeleccionada === primeraOpcion) {
+      tieneLlave = true;
+    } else {
+      tieneLlave = false;
+    }
+    if (tieneLlave == true) {
+      if (contadorQuin < opcionTieneLlave.length) {
+        dialogoFrame = new SeccionDialogo();
+        texto = opcionTieneLlave[contadorQuin];
+        dialogoFrame.show();
+        textoFrame.show();
+        textoFrame.setText(texto);
+        console.log("Esta wea funciona");
+      } else if (contadorQuin < opcionNoLlave.length) {
+        dialogoFrame = new SeccionDialogo();
+        texto = opcionNoLlave[contadorQuin];
+        dialogoFrame.show();
+        textoFrame.show();
+        textoFrame.setText(texto);
+        console.log("Esta wea funciona 2");
+      }
+    }
   }
 }
