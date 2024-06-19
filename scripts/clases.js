@@ -37,7 +37,7 @@ class DialogoTexto {
 }
 
 // Clase para los botones de opción
-class BotonOpcion {
+class BotonOpcionInicio {
   constructor(text, x, y, w, h, resultado) {
     this.text = text;
     this.x = x;
@@ -158,10 +158,6 @@ function updateOpacity() {
         contadorCuar < opcionSeleccionada2.length
       ) {
         contadorCuar++;
-      } else if (contadorQuin < opcionTieneLlave.length) {
-        contadorQuin++;
-      } else if (contadorQuin < opcionNoLlave.length) {
-        contadorQuin++;
       }
 
       opacidadApa = true; // Iniciar la animación de aparición

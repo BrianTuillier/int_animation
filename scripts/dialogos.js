@@ -31,15 +31,19 @@ let segundaOpcion = ["Por la derecha siempre", "Aguante millel"];
 //sEGUNDA ESCENA
 let introCastillo = [
   "AL FIN",
-  "DIOS",
   "DESPUÉS DE TANTO",
-  "Dios mío me duele todo",
   "Espero que esto valga la pena",
   "Wow....",
   "Se ve incluso más grande desde aqui",
   "Raro que no haya nadie aquí",
   "Teniendo secuestrada a una princesa tan buscada ¿No deberían haber guardias o algo así?",
   "O tal vez soy el único que arriesgaría su vida por lo que vale un turron fulbito...",
+];
+
+let opcionEntrarCastillo = ["Entrar al castillo"];
+let opcionNoEntrarCastillo = ["No entrar al castillo"];
+
+let entradaCastillo = [
   "Bueno, no importa, es la hora de la verdad",
   "...",
   "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí",
@@ -53,6 +57,7 @@ let introCastillo = [
   "Espera, la escalera se divide en 2, y no pareciera que lleven a lo mismo",
   "¿Por donde voy?",
 ];
+let noEntradaCastillo = ["Naaa, ni empedo me mando", "CHAU"];
 
 let castilloOpcion = "A ver qué onda";
 let castilloOpcion2 = "Me mando por aca ya fue";
@@ -60,10 +65,6 @@ let castilloOpcion2 = "Me mando por aca ya fue";
 let opcionCastillo = [
   ".",
   "...",
-  "...",
-
-  "Oh",
-  "Esa zona está iluminada",
   "...",
   "Oooooookey????",
   "¿Qué se supone que es este lugar?",
