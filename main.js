@@ -6,6 +6,7 @@ let contadorCuar = 0;
 let contadorQuin = 0;
 let opcionSeleccionada = null;
 let opcionSeleccionada2 = null;
+let opcionSeleccionada3 = null;
 let opacidadDes = false; // Indica si se está realizando la animación de desaparición
 let opacidadApa = true; // Indica si se está realizando la animación de aparición
 let cantidadOpacidad = 30; // Controla la velocidad de la animación
@@ -14,10 +15,12 @@ let opacity = 200; // Controla la opacidad del cuadro de diálogo y el texto
 // Variables para las clases que se utilizan
 let dialogoFrame;
 let textoFrame;
-let botonIzquierda;
-let botonDerecha;
+let botonIzquierdaInicio;
+let botonDerechaInicio;
 let botonIzquierdaCastillo;
 let botonDerechaCastillo;
+let botonIzquierdaLobby;
+let botonDerechaLobby;
 
 // Padding para el texto dentro del rectángulo de diálogo
 let padding = 20;
@@ -62,7 +65,7 @@ function setup() {
   cancionBosque = loadSound("Assets/Bg_sound/Forest.wav");
 
   // Inicializar los botones de opciones, pero no mostrarlos aún
-  botonIzquierda = new BotonOpcionInicio(
+  botonIzquierdaInicio = new BotonOpcionInicio(
     introOpcion,
     width / 2 - 200,
     height / 2,
@@ -70,7 +73,7 @@ function setup() {
     70,
     primeraOpcion
   );
-  botonDerecha = new BotonOpcionInicio(
+  botonDerechaInicio = new BotonOpcionInicio(
     introOpcion2,
     width / 2 + 50,
     height / 2,
@@ -94,6 +97,15 @@ function setup() {
     70,
     noEntradaCastillo
   );
+  botonIzquierdaLobby = new BotonOpcionTercero(
+    castilloOpcion,
+    width / 2 - 200,
+    height / 2,
+    150,
+    70,
+    opcionCastillo
+  );
+
   dialogoFrame = new SeccionDialogo();
   textoFrame = new DialogoTexto("", 330, 570, 760, 110);
 }
@@ -110,7 +122,8 @@ function draw() {
   // Dibujar la escena
   updateOpacity();
   mostrarEscena();
-  mostrarEscenaCastillo();
+  mostrarEscenaEntrarCastillo();
+  // mostrarEscenaCastillo();
 }
 
 // Función para establecer el segundo fondo

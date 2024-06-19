@@ -54,10 +54,10 @@ let entradaCastillo = [
   "En las películas suelen estar en la parte más alta",
   "¿Verdad?",
   "Entonces debo empezar a subir",
-  "Espera, la escalera se divide en 2, y no pareciera que lleven a lo mismo",
+  "Espera, la escalera se divide en 2 y no pareciera que lleven a lo mismo",
   "¿Por donde voy?",
 ];
-let noEntradaCastillo = ["Naaa, ni empedo me mando", "CHAU"];
+let noEntradaCastillo = ["Naaa, ni empedo me mando", "JUEGO TERMINADO :D"];
 
 let castilloOpcion = "A ver qué onda";
 let castilloOpcion2 = "Me mando por aca ya fue";

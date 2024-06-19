@@ -6,12 +6,14 @@ function mostrarEscena() {
     dialogoFrame.show();
     textoFrame.show();
     textoFrame.setText(texto);
-    botonIzquierda.hide();
-    botonDerecha.hide();
+    botonIzquierdaInicio.hide();
+    botonDerechaInicio.hide();
+    botonIzquierdaLobby.hide();
   } else if (opcionSeleccionada === null) {
     dialogoFrame.hide();
-    botonIzquierda.show();
-    botonDerecha.show();
+    botonIzquierdaInicio.show();
+    botonDerechaInicio.show();
+
     textoFrame.setText("");
   }
   // Mostrar opciones basadas en la opción seleccionada
@@ -22,8 +24,8 @@ function mostrarEscena() {
       dialogoFrame.show();
       textoFrame.show();
       textoFrame.setText(texto);
-      botonIzquierda.hide();
-      botonDerecha.hide();
+      botonIzquierdaInicio.hide();
+      botonDerechaInicio.hide();
     }
   } else if (opcionSeleccionada == segundaOpcion) {
     if (contadorSeg < segundaOpcion.length) {
@@ -32,13 +34,13 @@ function mostrarEscena() {
       dialogoFrame.show();
       textoFrame.show();
       textoFrame.setText(texto);
-      botonIzquierda.hide();
-      botonDerecha.hide();
+      botonIzquierdaInicio.hide();
+      botonDerechaInicio.hide();
     }
   }
 }
 
-function mostrarEscenaCastillo() {
+function mostrarEscenaEntrarCastillo() {
   texto = "";
 
   // Mostrar intro del castillo o los botones según el valor del contador
@@ -54,19 +56,6 @@ function mostrarEscenaCastillo() {
     botonDerechaCastillo.show();
     dialogoFrame.hide();
     textoFrame.setText("");
-  }
-
-  // Mostrar opciones del castillo basadas en la opción seleccionada
-  if (opcionSeleccionada2 == entradaCastillo) {
-    if (contadorCuar < entradaCastillo.length) {
-      dialogoFrame = new SeccionDialogo();
-      texto = entradaCastillo[contadorCuar];
-      dialogoFrame.show();
-      textoFrame.show();
-      textoFrame.setText(texto);
-      botonIzquierdaCastillo.hide();
-      botonDerechaCastillo.hide();
-    }
   } else if (opcionSeleccionada2 == noEntradaCastillo) {
     if (contadorCuar < noEntradaCastillo.length) {
       dialogoFrame = new SeccionDialogo();
@@ -77,27 +66,52 @@ function mostrarEscenaCastillo() {
       botonIzquierdaCastillo.hide();
       botonDerechaCastillo.hide();
     }
-    // if (opcionSeleccionada === primeraOpcion) {
-    //   tieneLlave = true;
-    // } else {
-    //   tieneLlave = false;
-    // }
-    // if (tieneLlave == true) {
-    //   if (contadorQuin < opcionTieneLlave.length) {
-    //     dialogoFrame = new SeccionDialogo();
-    //     texto = opcionTieneLlave[contadorQuin];
-    //     dialogoFrame.show();
-    //     textoFrame.show();
-    //     textoFrame.setText(texto);
-    //     console.log("Esta wea funciona");
-    //   } else if (contadorQuin < opcionNoLlave.length) {
-    //     dialogoFrame = new SeccionDialogo();
-    //     texto = opcionNoLlave[contadorQuin];
-    //     dialogoFrame.show();
-    //     textoFrame.show();
-    //     textoFrame.setText(texto);
-    //     console.log("Esta wea funciona 2");
-    //   }
-    // }
+  } else if (opcionSeleccionada2 == entradaCastillo) {
+    if (contadorCuar < entradaCastillo.length) {
+      dialogoFrame = new SeccionDialogo();
+      texto = entradaCastillo[contadorCuar];
+      dialogoFrame.show();
+      textoFrame.show();
+      textoFrame.setText(texto);
+      botonIzquierdaCastillo.hide();
+      botonDerechaCastillo.hide();
+    } else if (opcionSeleccionada3 == null) {
+      botonIzquierdaLobby.hide();
+      dialogoFrame.hide();
+      textoFrame.setText("");
+    }
+  } else if (opcionSeleccionada3 == opcionCastillo) {
+    if (contadorQuin < opcionCastillo.length) {
+      dialogoFrame = new SeccionDialogo();
+      texto = opcionCastillo[contadorQuin];
+      dialogoFrame.show();
+      textoFrame.show();
+      textoFrame.setText(texto);
+      botonIzquierdaLobby.show();
+      console.log("Funciona opcion lobby");
+    }
   }
 }
+
+// if (opcionSeleccionada === primeraOpcion) {
+// tieneLlave = true;
+// } else {
+// tieneLlave = false;
+// }
+// if (tieneLlave == true) {
+// if (contadorQuin < opcionTieneLlave.length) {
+// dialogoFrame = new SeccionDialogo();
+// texto = opcionTieneLlave[contadorQuin];
+// dialogoFrame.show();
+// textoFrame.show();
+// textoFrame.setText(texto);
+// console.log("Esta wea funciona");
+// } else if (contadorQuin < opcionNoLlave.length) {
+// dialogoFrame = new SeccionDialogo();
+// texto = opcionNoLlave[contadorQuin];
+// dialogoFrame.show();
+// textoFrame.show();
+// textoFrame.setText(texto);
+// console.log("Esta wea funciona 2");
+// }
+// }
