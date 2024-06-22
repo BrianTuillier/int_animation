@@ -1,26 +1,15 @@
-// Variables para controlar el estado de la animación de diálogo
-let contador = 0;
-let contadorSeg = 0;
-let contadorTer = 0;
-let contadorCuar = 0;
-let contadorQuin = 0;
-let opcionSeleccionada = null;
-let opcionSeleccionada2 = null;
-let opcionSeleccionada3 = null;
-let opacidadDes = false; // Indica si se está realizando la animación de desaparición
-let opacidadApa = true; // Indica si se está realizando la animación de aparición
-let cantidadOpacidad = 30; // Controla la velocidad de la animación
-let opacity = 200; // Controla la opacidad del cuadro de diálogo y el texto
-
 // Variables para las clases que se utilizan
-let dialogoFrame;
-let textoFrame;
+let ComponenteDialogo;
+let ComponenteTexto;
+
 let botonIzquierdaInicio;
 let botonDerechaInicio;
 let botonIzquierdaCastillo;
 let botonDerechaCastillo;
 let botonIzquierdaLobby;
-let botonDerechaLobby;
+
+// Fondo
+let videoFondoBosque;
 
 // Padding para el texto dentro del rectángulo de diálogo
 let padding = 20;
@@ -43,14 +32,16 @@ let UsarFondoOscuro = false;
 let Pasillo;
 let usarFondoPasillo = false;
 
-let tieneLlave = false;
+let forestVideo;
 
-let cancionBosque;
+let tieneLlave = false;
 
 // Función que se ejecuta al inicio del programa
 function setup() {
   // Crear el canvas donde se mostrará la animación
-  createCanvas(1360, 764);
+  createCanvas(1300, 700);
+
+  forestVideo = createVideo("Assets/Sprites/videos/forest.mp4");
 
   // Cargar las imágenes que se utilizarán
   fondoBosque = loadImage("Assets/Sprites/forest.jpeg");
@@ -61,11 +52,11 @@ function setup() {
   Lobby = loadImage("Assets/Sprites/Lobby.jpeg");
   Pasillo = loadImage("Assets/Sprites/hall.jpeg");
   Escaleras = loadImage("Assets/Sprites/upstairs.jpeg");
-  // Musicas de fondos
-  cancionBosque = loadSound("Assets/Bg_sound/Forest.wav");
+
+  // videoFondoBosque = new CrearVideo(forestVideo);
 
   // Inicializar los botones de opciones, pero no mostrarlos aún
-  botonIzquierdaInicio = new BotonOpcionInicio(
+  botonIzquierdaInicio = new BotonInicio(
     introOpcion,
     width / 2 - 200,
     height / 2,
@@ -73,7 +64,7 @@ function setup() {
     70,
     primeraOpcion
   );
-  botonDerechaInicio = new BotonOpcionInicio(
+  botonDerechaInicio = new BotonInicio(
     introOpcion2,
     width / 2 + 50,
     height / 2,
@@ -81,7 +72,7 @@ function setup() {
     70,
     segundaOpcion
   );
-  botonIzquierdaCastillo = new BotonOpcionSegundo(
+  botonIzquierdaCastillo = new BotonInicio(
     opcionEntrarCastillo,
     width / 2 - 200,
     height / 2,
@@ -89,7 +80,7 @@ function setup() {
     70,
     entradaCastillo
   );
-  botonDerechaCastillo = new BotonOpcionSegundo(
+  botonDerechaCastillo = new BotonInicio(
     opcionNoEntrarCastillo,
     width / 2 + 50,
     height / 2,
@@ -97,33 +88,28 @@ function setup() {
     70,
     noEntradaCastillo
   );
-  botonIzquierdaLobby = new BotonOpcionTercero(
-    castilloOpcion,
-    width / 2 - 200,
-    height / 2,
-    150,
-    70,
-    opcionCastillo
-  );
+  // botonIzquierdaLobby = new BotonOpcionTercero(
+  //   castilloOpcion,
+  //   width / 2 - 200,
+  //   height / 2,
+  //   150,
+  //   70,
+  //   opcionCastillo
+  // );
 
-  dialogoFrame = new SeccionDialogo();
-  textoFrame = new DialogoTexto("", 330, 570, 760, 110);
+  ComponenteDialogo = new Dialogo();
+  ComponenteTexto = new Texto("", 330, 570, 760, 110);
 }
 
 // Función que se ejecuta en cada frame
 function draw() {
-  // Establecer el fondo dependiendo del estado actual del diálogo
-  // Actualizar la opacidad para manejar las transiciones
   fondosInicio();
   fondosCastillo();
-  // fondoLobby();
-  // fondoEscalera();
 
-  // Dibujar la escena
+  PrimeraEscena();
+  SegundaEscena();
+
   updateOpacity();
-  mostrarEscena();
-  mostrarEscenaEntrarCastillo();
-  // mostrarEscenaCastillo();
 }
 
 // Función para establecer el segundo fondo
@@ -135,9 +121,12 @@ function fondosInicio() {
       usarFondoLlave = true;
       usarFondoOpciones = false;
     } else if (intro[contador] === "...") {
+      console.log("Se deberia ejecutar");
       background(0);
+      // fondoBosque.show();
     } else {
       background(fondoBosque);
+      // videoFondoBosque.show();
     }
     if (usarFondoOpciones) {
       background(fondoOpciones);
@@ -183,27 +172,3 @@ function fondosCastillo() {
     UsarFondoOscuro = true;
   }
 }
-
-// function fondoLobby() {
-//   if (UsarFondoOscuro) {
-//     background(0);
-//   } else if (opcionCastillo[contadorCuar] === "...") {
-//     UsarFondoOscuro = true;
-//     usarFondoEscaleras = false;
-//     console.log("Fondo oscuro funcionaaa");
-//   }
-//   if (usarFondoPasillo) {
-//     background(Pasillo);
-//   } else if (opcionCastillo[contadorCuar] === "Oooooookey????") {
-//     usarFondoPasillo = true;
-//   }
-// }
-
-// function fondoEscalera() {
-//   if (usarFondoEscaleras) {
-//     background(Escaleras);
-//   } else if (opcionCastillo2[contadorCuar] === "¿Una escalera?") {
-//     usarFondoEscaleras = true;
-//     console.log("Funciona fondo escalera");
-//   }
-// }

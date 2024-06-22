@@ -63,7 +63,7 @@ let castilloOpcion = "A ver qué onda";
 let castilloOpcion2 = "Me mando por aca ya fue";
 
 let opcionCastillo = [
-  ".",
+  "sex",
   "...",
   "...",
   "Oooooookey????",
