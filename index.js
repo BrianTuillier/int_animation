@@ -31,6 +31,8 @@ let usarFondoEscaleras;
 let UsarFondoOscuro = false;
 let Pasillo;
 let usarFondoPasillo = false;
+let Jaula;
+let usarFondoJaula = false;
 
 let forestVideo;
 
@@ -39,9 +41,9 @@ let tieneLlave = false;
 // Función que se ejecuta al inicio del programa
 function setup() {
   // Crear el canvas donde se mostrará la animación
-  createCanvas(1300, 700);
-
-  forestVideo = createVideo("Assets/Sprites/videos/forest.mp4");
+  // createCanvas(1300, 700);
+  createCanvas(windowWidth, windowHeight);
+  // forestVideo = createVideo("Assets/Sprites/videos/forest.mp4");
 
   // Cargar las imágenes que se utilizarán
   fondoBosque = loadImage("Assets/Sprites/forest.jpeg");
@@ -51,28 +53,29 @@ function setup() {
   CastilloCerca = loadImage("Assets/Sprites/castle.jpeg");
   Lobby = loadImage("Assets/Sprites/Lobby.jpeg");
   Pasillo = loadImage("Assets/Sprites/hall.jpeg");
+  Jaula = loadImage("Assets/Sprites/jail.jpeg");
   Escaleras = loadImage("Assets/Sprites/upstairs.jpeg");
 
   // videoFondoBosque = new CrearVideo(forestVideo);
 
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierdaInicio = new BotonInicio(
-    introOpcion,
+    introOpcionIzquierda,
     width / 2 - 200,
     height / 2,
     150,
     70,
-    primeraOpcion
+    introPrimeraOpcion
   );
   botonDerechaInicio = new BotonInicio(
-    introOpcion2,
+    introOpcionDerecha,
     width / 2 + 50,
     height / 2,
     150,
     70,
-    segundaOpcion
+    introSegundaOpcion
   );
-  botonIzquierdaCastillo = new BotonInicio(
+  botonIzquierdaCastillo = new BotonEntrada(
     opcionEntrarCastillo,
     width / 2 - 200,
     height / 2,
@@ -80,7 +83,7 @@ function setup() {
     70,
     entradaCastillo
   );
-  botonDerechaCastillo = new BotonInicio(
+  botonDerechaCastillo = new BotonEntrada(
     opcionNoEntrarCastillo,
     width / 2 + 50,
     height / 2,
@@ -88,26 +91,37 @@ function setup() {
     70,
     noEntradaCastillo
   );
-  // botonIzquierdaLobby = new BotonOpcionTercero(
-  //   castilloOpcion,
-  //   width / 2 - 200,
-  //   height / 2,
-  //   150,
-  //   70,
-  //   opcionCastillo
-  // );
+  botonIzquierdaLobby = new BotonLobby(
+    lobbyOpcionIzquierda,
+    width / 2 - 200,
+    height / 2,
+    150,
+    70,
+    lobbyPrimeraOpcion
+  );
+  botonDerechaLobby = new BotonLobby(
+    lobbyOpcionDerecha,
+    width / 2 + 50,
+    height / 2,
+    150,
+    70,
+    lobbySegundaOpcion
+  );
 
   ComponenteDialogo = new Dialogo();
-  ComponenteTexto = new Texto("", 330, 570, 760, 110);
+  ComponenteTexto = new Texto("");
 }
 
 // Función que se ejecuta en cada frame
 function draw() {
   fondosInicio();
   fondosCastillo();
+  fondosPasillo();
+  fondosEscalera();
 
-  PrimeraEscena();
   SegundaEscena();
+  PrimeraEscena();
+  TerceraEscena();
 
   updateOpacity();
 }
@@ -116,12 +130,11 @@ function draw() {
 function fondosInicio() {
   if (usarFondoLlave) {
     background(Llave);
-  } else if (contadorSeg < primeraOpcion.length) {
-    if (primeraOpcion[contadorSeg] === "¿Qué es eso?") {
+  } else if (contadorSeg < introPrimeraOpcion.length) {
+    if (introPrimeraOpcion[contadorSeg] === "¿Qué es eso?") {
       usarFondoLlave = true;
       usarFondoOpciones = false;
-    } else if (intro[contador] === "...") {
-      console.log("Se deberia ejecutar");
+    } else if (introduccion[contador] === "...") {
       background(0);
       // fondoBosque.show();
     } else {
@@ -130,8 +143,8 @@ function fondosInicio() {
     }
     if (usarFondoOpciones) {
       background(fondoOpciones);
-    } else if (contador < intro.length) {
-      if (intro[contador] === "El camino se termina dividiendo en 2") {
+    } else if (contador < introduccion.length) {
+      if (introduccion[contador] === "El camino se termina dividiendo en 2") {
         usarFondoOpciones = true;
       }
     }
@@ -141,10 +154,12 @@ function fondosInicio() {
 // Función fara establecer el tercer fondo
 
 function fondosCastillo() {
+  if (introPrimeraOpcion[contadorSeg] === "...") {
+    background(0);
+    console.log("Ejecutandose fondo negro primera escena");
+  }
   if (usarFondoCastillo) {
     background(CastilloLejos);
-  } else if (primeraOpcion[contadorSeg] === "...") {
-    background(0);
   } else if (introCastillo[contadorTer] === "Wow....") {
     background(CastilloLejos);
     usarFondoCastillo = true;
@@ -153,22 +168,51 @@ function fondosCastillo() {
     background(CastilloCerca);
   } else if (introCastillo[contadorTer] === "Raro que no haya nadie aquí") {
     usarFondoCastilloCerca = true;
-  }
-  if (entradaCastillo[contadorCuar] === "...") {
+  } else if (lobbyCastillo[contadorQuin] === "...") {
+    usarFondoCastilloCerca = false;
     background(0);
   } else if (
-    entradaCastillo[contadorCuar] ===
+    lobbyCastillo[contadorQuin] ===
     "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí"
   ) {
     background(0);
-  } else if (entradaCastillo[contadorCuar] === "¿Por donde voy?") {
+  } else if (lobbyCastillo[contadorQuin] === "¿Por donde voy?") {
   }
   if (usarFondoLobby) {
     background(Lobby);
-  } else if (entradaCastillo[contadorCuar] === "Wow") {
+  } else if (lobbyCastillo[contadorQuin] === "Wow") {
     usarFondoLobby = true;
+  } else if (noEntradaCastillo[contadorTer] === "JUEGO TERMINADO :D") {
+    background(0);
+    console.log("Termino el juego");
   }
-  if (noEntradaCastillo[contadorTer] === "CHAU") {
+}
+
+function fondosPasillo() {
+  if (UsarFondoOscuro) {
+    background(0);
+  } else if (lobbyPrimeraOpcion[contadorSext] === "Esto está feo") {
+    usarFondoPasillo = false;
     UsarFondoOscuro = true;
+  }
+  if (usarFondoPasillo) {
+    background(Pasillo);
+  } else if (lobbyPrimeraOpcion[contadorSext] === "Oooooookey????") {
+    usarFondoPasillo = true;
+  }
+  if (usarFondoJaula) {
+    background(Jaula);
+  } else if (lobbyPrimeraOpcion[contadorSext] === "¿S-S-SE...") {
+    usarFondoJaula = true;
+  }
+}
+
+function fondosEscalera() {
+  if (usarFondoEscaleras) {
+    background(Escaleras);
+  } else if (lobbyPrimeraOpcion[contadorSext] === "¿Una escalera?") {
+    usarFondoEscaleras = true;
+    usarFondoPasillo = false;
+    console.log("Funciona esta wea de las imagnes");
   }
 }
