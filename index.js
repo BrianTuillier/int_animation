@@ -33,8 +33,16 @@ let Pasillo;
 let usarFondoPasillo = false;
 let Jaula;
 let usarFondoJaula = false;
+let Dormitorio;
+let usarFondoDormitorio = false;
 
-let forestVideo;
+let Ogro;
+let ItemLlave;
+let usarFondoItemLlave = false;
+let Princesa;
+let usarPersonajePrincesa = false;
+let Cofre;
+let usarItemCofre = false;
 
 let tieneLlave = false;
 
@@ -55,8 +63,12 @@ function setup() {
   Pasillo = loadImage("Assets/Sprites/hall.jpeg");
   Jaula = loadImage("Assets/Sprites/jail.jpeg");
   Escaleras = loadImage("Assets/Sprites/upstairs.jpeg");
+  Dormitorio = loadImage("Assets/Sprites/room-princess.jpg");
 
-  // videoFondoBosque = new CrearVideo(forestVideo);
+  Ogro = loadImage("Assets/Sprites/ogro.png");
+  ItemLlave = loadImage("Assets/Sprites/Key.png");
+  Princesa = loadImage("Assets/Sprites/princess.png");
+  Cofre = loadImage("Assets/Sprites/quest.jpg");
 
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierdaInicio = new BotonInicio(
@@ -122,6 +134,7 @@ function draw() {
   } else {
     fondosEscalera();
   }
+  fondosTieneLlave();
 
   SegundaEscena();
   PrimeraEscena();
@@ -130,7 +143,6 @@ function draw() {
   updateOpacity();
 }
 
-// Función para establecer el segundo fondo
 function fondosInicio() {
   if (usarFondoLlave) {
     background(Llave);
@@ -154,8 +166,6 @@ function fondosInicio() {
     }
   }
 }
-
-// Función fara establecer el tercer fondo
 
 function fondosCastillo() {
   if (introPrimeraOpcion[contadorSeg] === "...") {
@@ -208,6 +218,12 @@ function fondosPasillo() {
   } else if (lobbyPrimeraOpcion[contadorSext] === "¿S-S-SE...") {
     usarFondoJaula = true;
   }
+  if (
+    lobbyPrimeraOpcion[contadorSext] === "¿¿¿¿¿SE ACABA DE ABRIR UNA JAULA?????"
+  ) {
+    image(Ogro, windowWidth / 2 - 200, 100);
+    console.log("It worked");
+  }
 }
 
 function fondosEscalera() {
@@ -215,11 +231,37 @@ function fondosEscalera() {
     background(Escaleras);
   } else if (lobbySegundaOpcion[contadorSext] === "¿Una escalera?") {
     usarFondoEscaleras = true;
-    console.log("Funciona esta wea de las imagenes");
   }
   if (UsarFondoOscuro) {
     background(0);
   }
 }
 
-function fondosTieneLlave() {}
+function fondosTieneLlave() {
+  if (usarFondoItemLlave) {
+    image(ItemLlave, windowWidth / 2 - 200, 100);
+  } else if (opcionTieneLlave[contadorSept] === "¿Servirá? Tiene pinta") {
+    usarFondoItemLlave = true;
+  }
+  if (UsarFondoOscuro) {
+    background(0);
+  } else if (opcionTieneLlave[contadorSept] === "A ver...") {
+    UsarFondoOscuro = true;
+    usarFondoItemLlave = false;
+  }
+  if (usarFondoDormitorio) {
+    background(Dormitorio);
+  } else if (opcionTieneLlave[contadorSept] === "¿Eh?") {
+    usarFondoDormitorio = true;
+  }
+  if (usarPersonajePrincesa) {
+    image(Princesa, windowWidth / 2 - 250, 200);
+  } else if (opcionTieneLlave[contadorSept] === "PRINCESA") {
+    usarPersonajePrincesa = true;
+  }
+  if (usarItemCofre) {
+    background(Cofre);
+  } else if (opcionTieneLlave[contadorSept] === "¿Un cofre?") {
+    usarItemCofre = true;
+  }
+}
