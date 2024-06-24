@@ -116,8 +116,12 @@ function setup() {
 function draw() {
   fondosInicio();
   fondosCastillo();
-  fondosPasillo();
-  fondosEscalera();
+
+  if (opcionSeleccionadaLobby === lobbyPrimeraOpcion) {
+    fondosPasillo();
+  } else {
+    fondosEscalera();
+  }
 
   SegundaEscena();
   PrimeraEscena();
@@ -156,7 +160,6 @@ function fondosInicio() {
 function fondosCastillo() {
   if (introPrimeraOpcion[contadorSeg] === "...") {
     background(0);
-    console.log("Ejecutandose fondo negro primera escena");
   }
   if (usarFondoCastillo) {
     background(CastilloLejos);
@@ -210,9 +213,11 @@ function fondosPasillo() {
 function fondosEscalera() {
   if (usarFondoEscaleras) {
     background(Escaleras);
-  } else if (lobbyPrimeraOpcion[contadorSext] === "¿Una escalera?") {
+  } else if (lobbySegundaOpcion[contadorSext] === "¿Una escalera?") {
     usarFondoEscaleras = true;
-    usarFondoPasillo = false;
-    console.log("Funciona esta wea de las imagnes");
+    console.log("Funciona esta wea de las imagenes");
+  }
+  if (UsarFondoOscuro) {
+    background(0);
   }
 }

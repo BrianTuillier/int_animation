@@ -9,6 +9,7 @@ let contadorTer = 0;
 let contadorCuar = 0;
 let contadorQuin = 0;
 let contadorSext = 0;
+let contadorSept = 0;
 
 let opcionSeleccionada = null;
 let opcionSeleccionadaEntrada = null;
