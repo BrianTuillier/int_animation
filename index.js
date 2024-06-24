@@ -221,3 +221,5 @@ function fondosEscalera() {
     background(0);
   }
 }
+
+function fondosTieneLlave() {}

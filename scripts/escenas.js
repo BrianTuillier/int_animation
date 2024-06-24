@@ -106,6 +106,28 @@ function TerceraEscena() {
       botonIzquierdaLobby.hide();
       botonDerechaLobby.hide();
     }
+    if (opcionSeleccionada === introPrimeraOpcion) {
+      tieneLlave = true;
+    } else {
+      tieneLlave = false;
+    }
+    if (tieneLlave == true) {
+      if (contadorSept < opcionTieneLlave.length) {
+        ComponenteDialogo = new Dialogo();
+        texto = opcionTieneLlave[contadorSept];
+        MostrarComponentes();
+        ComponenteTexto.setText(texto);
+        console.log("Esta wea funciona");
+      }
+    } else {
+      if (contadorSept < opcionNoLlave.length) {
+        ComponenteDialogo = new Dialogo();
+        texto = opcionNoLlave[contadorSept];
+        MostrarComponentes();
+        ComponenteTexto.setText(texto);
+        console.log("Esta wea funciona 2");
+      }
+    }
   }
 }
 

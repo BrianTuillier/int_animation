@@ -62,5 +62,9 @@ function AvanzarDialogo() {
     contadorSext < opcionSeleccionadaLobby.length
   ) {
     contadorSext++;
+  } else if (contadorSept < opcionTieneLlave.length) {
+    contadorSept++;
+  } else if (contadorSept < opcionNoLlave.length) {
+    contadorSept++;
   }
 }
