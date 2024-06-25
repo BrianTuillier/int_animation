@@ -37,6 +37,8 @@ let Dormitorio;
 let usarFondoDormitorio = false;
 
 let Ogro;
+let usarPersonajeOgro = false;
+let usarPersonajeOgroCerca = false;
 let ItemLlave;
 let usarFondoItemLlave = false;
 let Princesa;
@@ -45,6 +47,9 @@ let Cofre;
 let usarItemCofre = false;
 
 let tieneLlave = false;
+
+let gameOver;
+let usarFondoGameOver;
 
 // Función que se ejecuta al inicio del programa
 function setup() {
@@ -70,6 +75,7 @@ function setup() {
   Princesa = loadImage("Assets/Sprites/princess.png");
   Cofre = loadImage("Assets/Sprites/quest.jpg");
 
+  gameOver = loadImage("Assets/Sprites/game-over.jpg");
   // Inicializar los botones de opciones, pero no mostrarlos aún
   botonIzquierdaInicio = new BotonInicio(
     introOpcionIzquierda,
@@ -134,7 +140,12 @@ function draw() {
   } else {
     fondosEscalera();
   }
-  fondosTieneLlave();
+
+  if (tieneLlave == true) {
+    fondosTieneLlave();
+  } else {
+    fondosNoTieneLlave();
+  }
 
   SegundaEscena();
   PrimeraEscena();
@@ -195,9 +206,6 @@ function fondosCastillo() {
     background(Lobby);
   } else if (lobbyCastillo[contadorQuin] === "Wow") {
     usarFondoLobby = true;
-  } else if (noEntradaCastillo[contadorTer] === "JUEGO TERMINADO :D") {
-    background(0);
-    console.log("Termino el juego");
   }
 }
 
@@ -263,5 +271,35 @@ function fondosTieneLlave() {
     background(Cofre);
   } else if (opcionTieneLlave[contadorSept] === "¿Un cofre?") {
     usarItemCofre = true;
+  }
+}
+
+function fondosNoTieneLlave() {
+  if (usarPersonajeOgro) {
+    image(Ogro, windowWidth / 2 - 350, 100);
+  } else if (opcionNoLlave[contadorSept] === "QUÉ ES ESO") {
+    usarPersonajeOgro = true;
+  }
+  if (usarPersonajeOgroCerca) {
+    image(Ogro, windowWidth / 2 - 600, 100, 1000, 1000);
+  }
+  if (opcionNoLlave[contadorSept] === "EH") {
+    usarPersonajeOgro = false;
+    usarPersonajeOgroCerca = true;
+  }
+  if (usarFondoGameOver) {
+    background(gameOver);
+  } else if (opcionNoLlave[contadorSept] === "NOOOOOO") {
+    OcultarComponentes();
+    ComponenteTexto.setText("");
+    usarFondoGameOver = true;
+    console.log("Se ejecuta el final malo");
+    //Final malo Escalera
+  } else if (noEntradaCastillo[contadorCuar] === "JUEGO TERMINADO :D") {
+    OcultarComponentes();
+    ComponenteTexto.setText("");
+    usarFondoGameOver = true;
+    console.log("Se ejecuta el final Raro?");
+    // Final alternativo
   }
 }

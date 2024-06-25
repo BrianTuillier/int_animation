@@ -109,9 +109,9 @@ let lobbySegundaOpcion = [
 let opcionNoLlave = [
   "Creo que no me queda otra que buscar otro camino",
   "Debería volver atrás, capaz el camino izquierdo tenga otra escalera",
-  "¿Eh?",
+  "¿E?",
   "¿Algo está subiendo las escaleras?",
-  "EH??",
+  "¿¿EH??",
   "QUÉ",
   "QUÉ ES ESO",
   "Amiiiiiigo",
@@ -179,5 +179,5 @@ let opcionSeleccionarPrincesa = [
   "La princesa en cuestión",
   "De milagro me dará las gracias",
   "Total",
-  "Todas mienten",
+  "Todas mienten",
 ];

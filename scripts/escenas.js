@@ -117,7 +117,6 @@ function TerceraEscena() {
         texto = opcionTieneLlave[contadorSept];
         MostrarComponentes();
         ComponenteTexto.setText(texto);
-        console.log("Esta wea funciona");
       }
     } else {
       if (contadorSept < opcionNoLlave.length) {
@@ -125,7 +124,6 @@ function TerceraEscena() {
         texto = opcionNoLlave[contadorSept];
         MostrarComponentes();
         ComponenteTexto.setText(texto);
-        console.log("Esta wea funciona 2");
       }
     }
   }
