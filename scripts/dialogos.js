@@ -66,8 +66,8 @@ let lobbyCastillo = [
   "¿Por donde voy?",
 ];
 
-let lobbyOpcionIzquierda = "A ver qué onda";
-let lobbyOpcionDerecha = "Me mando por aca ya fue";
+let lobbyOpcionIzquierda = "Ir por el lado izquierdo";
+let lobbyOpcionDerecha = "Ir por el lado derecho";
 
 let lobbyPrimeraOpcion = [
   "...",
@@ -87,6 +87,8 @@ let lobbyPrimeraOpcion = [
   "S-",
   "¿S-S-SE...",
   "¿¿¿¿¿SE ACABA DE ABRIR UNA JAULA?????",
+  "¿¿QUE ES ESO??",
+  "AYUDAAAAAAAAAAAA",
 ];
 
 let lobbySegundaOpcion = [

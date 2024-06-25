@@ -39,6 +39,8 @@ let usarFondoDormitorio = false;
 let Ogro;
 let usarPersonajeOgro = false;
 let usarPersonajeOgroCerca = false;
+let Fantasma;
+let usarPersonajeFantasma = false;
 let ItemLlave;
 let usarFondoItemLlave = false;
 let Princesa;
@@ -71,6 +73,7 @@ function setup() {
   Dormitorio = loadImage("Assets/Sprites/room-princess.jpg");
 
   Ogro = loadImage("Assets/Sprites/ogro.png");
+  Fantasma = loadImage("Assets/Sprites/ghost.png");
   ItemLlave = loadImage("Assets/Sprites/Key.png");
   Princesa = loadImage("Assets/Sprites/princess.png");
   Cofre = loadImage("Assets/Sprites/quest.jpg");
@@ -226,10 +229,10 @@ function fondosPasillo() {
   } else if (lobbyPrimeraOpcion[contadorSext] === "¿S-S-SE...") {
     usarFondoJaula = true;
   }
-  if (
-    lobbyPrimeraOpcion[contadorSext] === "¿¿¿¿¿SE ACABA DE ABRIR UNA JAULA?????"
-  ) {
-    image(Ogro, windowWidth / 2 - 200, 100);
+  if (usarPersonajeFantasma) {
+    image(Fantasma, windowWidth / 2 - 200, 100, 400, 400);
+  } else if (lobbyPrimeraOpcion[contadorSext] === "¿¿QUE ES ESO??") {
+    usarPersonajeFantasma = true;
     console.log("It worked");
   }
 }
@@ -293,13 +296,16 @@ function fondosNoTieneLlave() {
     OcultarComponentes();
     ComponenteTexto.setText("");
     usarFondoGameOver = true;
-    console.log("Se ejecuta el final malo");
     //Final malo Escalera
   } else if (noEntradaCastillo[contadorCuar] === "JUEGO TERMINADO :D") {
     OcultarComponentes();
     ComponenteTexto.setText("");
     usarFondoGameOver = true;
-    console.log("Se ejecuta el final Raro?");
     // Final alternativo
+  } else if (lobbyPrimeraOpcion[contadorSext] === "AYUDAAAAAAAAAAAA") {
+    OcultarComponentes();
+    ComponenteTexto.setText("");
+    usarFondoGameOver = true;
+    //Final malo pasillo
   }
 }
