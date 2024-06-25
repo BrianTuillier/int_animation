@@ -162,7 +162,7 @@ let dormitorioPrimeraOpcion = [
   "No...",
   "yo vine hasta aca para rescatar a la prinecsa",
   "no puedo dejarla aca asi nomas",
-  "seria muy estupido haberme recorrido todo el bosque ",
+  "seria muy estupido haberme recorrido todo el bosque para no rescatarla ",
   "vamo princesa.",
 ];
 let dormitorioSegundaOpcion = [

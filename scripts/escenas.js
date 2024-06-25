@@ -125,7 +125,6 @@ function TerceraEscena() {
         botonDerechaDormitorio.show();
         OcultarComponentes();
         ComponenteTexto.setText("");
-        console.log("Falta reproducir la escena final");
       } else if (opcionSeleccionadaDormitorio === dormitorioPrimeraOpcion) {
         if (contadorOct < dormitorioPrimeraOpcion.length) {
           ComponenteDialogo = new Dialogo();

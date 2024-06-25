@@ -19,7 +19,7 @@ class Texto {
     this.texts = texts;
     this.x = windowWidth / 2 - 380;
     // this.x = 380;
-    this.y = 480;
+    this.y = 500;
     this.w = 760;
     this.h = 110;
     this.visible = true;
