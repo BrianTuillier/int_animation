@@ -196,3 +196,39 @@ class BotonLobby {
     opcionSeleccionadaLobby = this.resultado;
   }
 }
+class BotonDormitorio {
+  constructor(opcion, x, y, w, h, resultado) {
+    this.opcion = opcion;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.resultado = resultado;
+    this.button = createButton(this.opcion);
+    this.button.position(this.x, this.y);
+    this.button.size(this.w, this.h);
+    this.button.mousePressed(() => this.seleccionarOpcion());
+    this.button.mouseOver(() =>
+      this.button.style("background-color", "rgba(200, 200, 200, 1.0)")
+    );
+    this.button.mouseOut(() =>
+      this.button.style("background-color", "rgba(255,255,255, 1.0)")
+    );
+    this.button.style("font-weight", "bold");
+    this.button.style("cursor", "pointer");
+    this.button.style("border-radius", "6px");
+    this.button.style("opacity", "0.9 ");
+  }
+
+  show() {
+    this.button.show();
+  }
+
+  hide() {
+    this.button.hide();
+  }
+
+  seleccionarOpcion() {
+    opcionSeleccionadaDormitorio = this.resultado;
+  }
+}

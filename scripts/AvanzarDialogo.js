@@ -10,10 +10,12 @@ let contadorCuar = 0;
 let contadorQuin = 0;
 let contadorSext = 0;
 let contadorSept = 0;
+let contadorOct = 0;
 
 let opcionSeleccionada = null;
 let opcionSeleccionadaEntrada = null;
 let opcionSeleccionadaLobby = null;
+let opcionSeleccionadaDormitorio = null;
 
 function mouseClicked() {
   avanzarDialogoConAnimacion();
@@ -66,5 +68,10 @@ function AvanzarDialogo() {
     contadorSept++;
   } else if (contadorSept < opcionNoLlave.length) {
     contadorSept++;
+  } else if (
+    opcionSeleccionadaDormitorio &&
+    contadorOct < opcionSeleccionadaDormitorio.length
+  ) {
+    contadorOct++;
   }
 }

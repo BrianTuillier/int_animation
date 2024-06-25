@@ -161,13 +161,16 @@ let opcionTieneLlave = [
   "¿Qué hago?",
 ];
 
-let JaulaOpcionIzquierda = [
+let dormitorioOpcionIzquierda = ["Elegir a la princesa"];
+let dormitorioOpcionDerecha = ["Elegir el cofre"];
+
+let dormitorioPrimeraOpcion = [
   "No...",
   "yo vine hasta aca para rescatar a la prinecsa",
   "no puedo dejarla aca asi nomas",
   "vamo princesa.",
 ];
-let opcionSeleccionarPrincesa = [
+let dormitorioSegundaOpcion = [
   "Pensándolo bien",
   "El cofre no es taaaaaaaaaaaaaaaaaaaaaaaaaaaan mala idea",
   "Va, sí lo es",

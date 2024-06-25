@@ -8,6 +8,8 @@ function PrimeraEscena() {
     botonDerechaInicio.hide();
     botonIzquierdaLobby.hide();
     botonDerechaLobby.hide();
+    botonDerechaDormitorio.hide();
+    botonIzquierdaDormitorio.hide();
   } else if (opcionSeleccionada === null) {
     ComponenteDialogo.hide();
     ComponenteTexto.setText("");
@@ -78,6 +80,7 @@ function TerceraEscena() {
     MostrarComponentes();
     ComponenteTexto.setText(texto);
     botonIzquierdaLobby.hide();
+    botonDerechaLobby.hide();
   } else if (opcionSeleccionadaLobby == null) {
     botonIzquierdaLobby.show();
     botonDerechaLobby.show();
@@ -117,6 +120,30 @@ function TerceraEscena() {
         texto = opcionTieneLlave[contadorSept];
         MostrarComponentes();
         ComponenteTexto.setText(texto);
+      } else if (opcionSeleccionadaDormitorio === null) {
+        botonIzquierdaDormitorio.show();
+        botonDerechaDormitorio.show();
+        OcultarComponentes();
+        ComponenteTexto.setText("");
+        console.log("Falta reproducir la escena final");
+      } else if (opcionSeleccionadaDormitorio === dormitorioPrimeraOpcion) {
+        if (contadorOct < dormitorioPrimeraOpcion.length) {
+          ComponenteDialogo = new Dialogo();
+          texto = dormitorioPrimeraOpcion[contadorOct];
+          MostrarComponentes();
+          ComponenteTexto.setText(texto);
+          botonIzquierdaDormitorio.hide();
+          botonDerechaDormitorio.hide();
+        }
+      } else if (opcionSeleccionadaDormitorio === dormitorioSegundaOpcion) {
+        if (contadorOct < dormitorioSegundaOpcion.length) {
+          ComponenteDialogo = new Dialogo();
+          texto = dormitorioSegundaOpcion[contadorOct];
+          MostrarComponentes();
+          ComponenteTexto.setText(texto);
+          botonIzquierdaDormitorio.hide();
+          botonDerechaDormitorio.hide();
+        }
       }
     } else {
       if (contadorSept < opcionNoLlave.length) {
