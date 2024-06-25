@@ -1,35 +1,35 @@
 function PrimeraEscena() {
   let texto = "";
-  if (contador < intro.length) {
-    texto = intro[contador];
-    ComponenteDialogo.show();
-    ComponenteTexto.show();
+  if (contador < introduccion.length) {
+    texto = introduccion[contador];
+    MostrarComponentes();
     ComponenteTexto.setText(texto);
     botonIzquierdaInicio.hide();
     botonDerechaInicio.hide();
+    botonIzquierdaLobby.hide();
+    botonDerechaLobby.hide();
+    botonDerechaDormitorio.hide();
+    botonIzquierdaDormitorio.hide();
   } else if (opcionSeleccionada === null) {
     ComponenteDialogo.hide();
+    ComponenteTexto.setText("");
     botonIzquierdaInicio.show();
     botonDerechaInicio.show();
-    ComponenteTexto.setText("");
   }
-  // Mostrar opciones basadas en la opción seleccionada
-  if (opcionSeleccionada == primeraOpcion) {
-    if (contadorSeg < primeraOpcion.length) {
+  if (opcionSeleccionada == introPrimeraOpcion) {
+    if (contadorSeg < introPrimeraOpcion.length) {
       ComponenteDialogo = new Dialogo();
-      texto = primeraOpcion[contadorSeg];
-      ComponenteDialogo.show();
-      ComponenteTexto.show();
+      texto = introPrimeraOpcion[contadorSeg];
+      MostrarComponentes();
       ComponenteTexto.setText(texto);
       botonIzquierdaInicio.hide();
       botonDerechaInicio.hide();
     }
-  } else if (opcionSeleccionada == segundaOpcion) {
-    if (contadorSeg < segundaOpcion.length) {
+  } else if (opcionSeleccionada == introSegundaOpcion) {
+    if (contadorSeg < introSegundaOpcion.length) {
       ComponenteDialogo = new Dialogo();
-      texto = segundaOpcion[contadorSeg];
-      ComponenteDialogo.show();
-      ComponenteTexto.show();
+      texto = introSegundaOpcion[contadorSeg];
+      MostrarComponentes();
       ComponenteTexto.setText(texto);
       botonIzquierdaInicio.hide();
       botonDerechaInicio.hide();
@@ -40,35 +40,32 @@ function PrimeraEscena() {
 function SegundaEscena() {
   texto = "";
 
-  // Mostrar intro del castillo o los botones según el valor del contador
   if (contadorTer < introCastillo.length) {
     texto = introCastillo[contadorTer];
-    ComponenteDialogo.show();
-    ComponenteTexto.show();
+    MostrarComponentes();
     ComponenteTexto.setText(texto);
     botonIzquierdaCastillo.hide();
     botonDerechaCastillo.hide();
-  } else if (opcionSeleccionada2 === null) {
+  } else if (opcionSeleccionadaEntrada === null) {
     botonIzquierdaCastillo.show();
     botonDerechaCastillo.show();
-    ComponenteDialogo.hide();
+    OcultarComponentes();
     ComponenteTexto.setText("");
-  } else if (opcionSeleccionada2 == noEntradaCastillo) {
+  }
+  if (opcionSeleccionadaEntrada == noEntradaCastillo) {
     if (contadorCuar < noEntradaCastillo.length) {
       ComponenteDialogo = new Dialogo();
       texto = noEntradaCastillo[contadorCuar];
-      ComponenteDialogo.show();
-      ComponenteTexto.show();
+      MostrarComponentes();
       ComponenteTexto.setText(texto);
       botonIzquierdaCastillo.hide();
       botonDerechaCastillo.hide();
     }
-  } else if (opcionSeleccionada2 == entradaCastillo) {
+  } else if (opcionSeleccionadaEntrada == entradaCastillo) {
     if (contadorCuar < entradaCastillo.length) {
       ComponenteDialogo = new Dialogo();
       texto = entradaCastillo[contadorCuar];
-      ComponenteDialogo.show();
-      ComponenteTexto.show();
+      MostrarComponentes();
       ComponenteTexto.setText(texto);
       botonIzquierdaCastillo.hide();
       botonDerechaCastillo.hide();
@@ -78,21 +75,91 @@ function SegundaEscena() {
 
 function TerceraEscena() {
   texto = "";
-
-  if (opcionSeleccionada3 == null) {
+  if (contadorQuin < lobbyCastillo.length) {
+    texto = lobbyCastillo[contadorQuin];
+    MostrarComponentes();
+    ComponenteTexto.setText(texto);
+    botonIzquierdaLobby.hide();
+    botonDerechaLobby.hide();
+  } else if (opcionSeleccionadaLobby == null) {
     botonIzquierdaLobby.show();
-    ComponenteDialogo.hide();
+    botonDerechaLobby.show();
+    OcultarComponentes();
     ComponenteTexto.setText("");
-    console.log("Funciona mostrar el boton");
-  } else if (opcionSeleccionada3 == opcionCastillo) {
-    if (contadorQuin < opcionCastillo.length) {
+  }
+  if (opcionSeleccionadaLobby == lobbyPrimeraOpcion) {
+    if (contadorSext < lobbyPrimeraOpcion.length) {
       ComponenteDialogo = new Dialogo();
-      texto = opcionCastillo[contadorQuin];
-      ComponenteDialogo.show();
-      ComponenteTexto.show();
+      texto = lobbyPrimeraOpcion[contadorSext];
+      MostrarComponentes();
       ComponenteTexto.setText(texto);
       botonIzquierdaLobby.hide();
-      console.log("Funciona opcion lobby");
+      botonDerechaLobby.hide();
+      if (lobbyPrimeraOpcion[contadorSext] === "¿Una escalera?") {
+        usarFondoEscaleras = true;
+        usarFondoPasillo = false;
+      }
+    }
+  } else if (opcionSeleccionadaLobby == lobbySegundaOpcion) {
+    if (contadorSext < lobbySegundaOpcion.length) {
+      ComponenteDialogo = new Dialogo();
+      texto = lobbySegundaOpcion[contadorSext];
+      MostrarComponentes();
+      ComponenteTexto.setText(texto);
+      botonIzquierdaLobby.hide();
+      botonDerechaLobby.hide();
+    }
+    if (opcionSeleccionada === introPrimeraOpcion) {
+      tieneLlave = true;
+    } else {
+      tieneLlave = false;
+    }
+    if (tieneLlave == true) {
+      if (contadorSept < opcionTieneLlave.length) {
+        ComponenteDialogo = new Dialogo();
+        texto = opcionTieneLlave[contadorSept];
+        MostrarComponentes();
+        ComponenteTexto.setText(texto);
+      } else if (opcionSeleccionadaDormitorio === null) {
+        botonIzquierdaDormitorio.show();
+        botonDerechaDormitorio.show();
+        OcultarComponentes();
+        ComponenteTexto.setText("");
+      } else if (opcionSeleccionadaDormitorio === dormitorioPrimeraOpcion) {
+        if (contadorOct < dormitorioPrimeraOpcion.length) {
+          ComponenteDialogo = new Dialogo();
+          texto = dormitorioPrimeraOpcion[contadorOct];
+          MostrarComponentes();
+          ComponenteTexto.setText(texto);
+          botonIzquierdaDormitorio.hide();
+          botonDerechaDormitorio.hide();
+        }
+      } else if (opcionSeleccionadaDormitorio === dormitorioSegundaOpcion) {
+        if (contadorOct < dormitorioSegundaOpcion.length) {
+          ComponenteDialogo = new Dialogo();
+          texto = dormitorioSegundaOpcion[contadorOct];
+          MostrarComponentes();
+          ComponenteTexto.setText(texto);
+          botonIzquierdaDormitorio.hide();
+          botonDerechaDormitorio.hide();
+        }
+      }
+    } else {
+      if (contadorSept < opcionNoLlave.length) {
+        ComponenteDialogo = new Dialogo();
+        texto = opcionNoLlave[contadorSept];
+        MostrarComponentes();
+        ComponenteTexto.setText(texto);
+      }
     }
   }
+}
+
+function MostrarComponentes() {
+  ComponenteDialogo.show();
+  ComponenteTexto.show();
+}
+
+function OcultarComponentes() {
+  ComponenteDialogo.hide();
 }

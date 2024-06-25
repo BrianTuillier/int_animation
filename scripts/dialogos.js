@@ -1,6 +1,6 @@
 // Se declaran los Dialogos
 // PRIMERA ESCENA
-let intro = [
+let introduccion = [
   "Estuve divagando un buen rato por este bosque",
   "No encuentro ninguna salida",
   "Ni mucho menos ninguna pista de ese castillo",
@@ -12,10 +12,10 @@ let intro = [
   "¿Qué camino debera tomar?",
 ];
 
-let introOpcion = "Seguir camino por la izquierda";
-let introOpcion2 = "Seguir camino por la derecha";
+let introOpcionIzquierda = "Seguir camino por la izquierda";
+let introOpcionDerecha = "Seguir camino por la derecha";
 
-let primeraOpcion = [
+let introPrimeraOpcion = [
   "Me parece que el camino de la izquierda tiene mejor pinta",
   "No creo que sea muy importante de todos modos, ya estoy perdido de igual forma .-.",
   "Oh, parece que hay algo de luz ahí",
@@ -26,10 +26,11 @@ let primeraOpcion = [
   "Quién dice, capaz y sirve de algo",
 ];
 
-let segundaOpcion = ["Por la derecha siempre", "Aguante millel"];
+let introSegundaOpcion = ["Por la derecha siempre", "Aguante millel"];
 
 //sEGUNDA ESCENA
 let introCastillo = [
+  ".",
   "AL FIN",
   "DESPUÉS DE TANTO",
   "Espero que esto valga la pena",
@@ -43,8 +44,15 @@ let introCastillo = [
 let opcionEntrarCastillo = ["Entrar al castillo"];
 let opcionNoEntrarCastillo = ["No entrar al castillo"];
 
-let entradaCastillo = [
-  "Bueno, no importa, es la hora de la verdad",
+let entradaCastillo = ["Bueno, no importa, es la hora de la verdad"];
+let noEntradaCastillo = [
+  "Naaa, ni empedo me mando",
+  "ya fue, mira si me voy a meter aca por 2 mangos",
+  "JUEGO TERMINADO :D",
+];
+
+let lobbyCastillo = [
+  "mmm",
   "...",
   "Que ruidosas puerta...creo que hasta Rio de Janeiro se enteró que estoy aquí",
   "Wow",
@@ -57,14 +65,11 @@ let entradaCastillo = [
   "Espera, la escalera se divide en 2 y no pareciera que lleven a lo mismo",
   "¿Por donde voy?",
 ];
-let noEntradaCastillo = ["Naaa, ni empedo me mando", "JUEGO TERMINADO :D"];
 
-let castilloOpcion = "A ver qué onda";
-let castilloOpcion2 = "Me mando por aca ya fue";
+let lobbyOpcionIzquierda = "Ir por el lado izquierdo";
+let lobbyOpcionDerecha = "Ir por el lado derecho";
 
-let opcionCastillo = [
-  "sex",
-  "...",
+let lobbyPrimeraOpcion = [
   "...",
   "Oooooookey????",
   "¿Qué se supone que es este lugar?",
@@ -73,7 +78,6 @@ let opcionCastillo = [
   "Debería ir",
   "Creo que no me queda la otra",
   "Si no, debería volver a estar a ciegas allá atrás...",
-  "No...eso no terminará muy bien...",
   "Mejor me mando",
   "Esto está feo",
   "Me siento observando",
@@ -83,9 +87,11 @@ let opcionCastillo = [
   "S-",
   "¿S-S-SE...",
   "¿¿¿¿¿SE ACABA DE ABRIR UNA JAULA?????",
+  "¿¿QUE ES ESO??",
+  "AYUDAAAAAAAAAAAA",
 ];
 
-let opcionCastillo2 = [
+let lobbySegundaOpcion = [
   "¿Mhm?",
   "¿Una escalera?",
   "Bueno, esto cumple con lo de 'suelen estar en la parte más alta', tiene sentido",
@@ -105,9 +111,9 @@ let opcionCastillo2 = [
 let opcionNoLlave = [
   "Creo que no me queda otra que buscar otro camino",
   "Debería volver atrás, capaz el camino izquierdo tenga otra escalera",
-  "¿Eh?",
+  "¿E?",
   "¿Algo está subiendo las escaleras?",
-  "EH??",
+  "¿¿EH??",
   "QUÉ",
   "QUÉ ES ESO",
   "Amiiiiiigo",
@@ -130,4 +136,48 @@ let opcionTieneLlave = [
   "Nostradamus un poroto",
   "Abro la puerta suavemente...",
   "dea",
+  "...",
+  "¿Será aquí?",
+  "¿Eh?",
+  "PRINCESA",
+  "Estaba aca encerrada",
+  "Una princesa no merece ser tratada de esta forma",
+  "¿Eh? ¿Y eso?",
+  "¿Un cofre?",
+  "Damn",
+  "Que raro",
+  "Puedo advertir a kilómetros de distancia que es una trampa anti-bobos",
+  "...",
+  "Tengo que rescatar a la princesa",
+  "Pero el cofre se ve taaaaaaaaaaaaaaan",
+  "No sé",
+  "Me mata la curiosidad",
+  "¿Qué hago?",
+];
+
+let dormitorioOpcionIzquierda = ["Elegir a la princesa"];
+let dormitorioOpcionDerecha = ["Elegir el cofre"];
+
+let dormitorioPrimeraOpcion = [
+  "No...",
+  "yo vine hasta aca para rescatar a la prinecsa",
+  "no puedo dejarla aca asi nomas",
+  "seria muy estupido haberme recorrido todo el bosque para no rescatarla ",
+  "vamo princesa.",
+];
+let dormitorioSegundaOpcion = [
+  "Pensándolo bien",
+  "El cofre no es taaaaaaaaaaaaaaaaaaaaaaaaaaaan mala idea",
+  "Va, sí lo es",
+  "Peeeeeeeeeeeeeeeeeeero",
+  "Después de todo lo que pasé",
+  "De los andá a saber cuántos días perdido en ese bosque",
+  "Creo que me merezco una recompensa",
+  "que no sean los 200 pesos...",
+  "y la falsa gratitud de una princesa",
+  "Ya que, aparte",
+  "La princesa en cuestión",
+  "De milagro me dará las gracias",
+  "Total",
+  "Todas mienten",
 ];
