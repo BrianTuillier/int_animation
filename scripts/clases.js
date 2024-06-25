@@ -6,7 +6,7 @@ class Dialogo {
     if (this.visible) {
       fill(255, opacity); // Usar la opacidad para la animación
       // rect(310, 560, 800, 150, 5);
-      rect(windowWidth / 2 - 400, windowHeight / 2 + 150, 800, 150, 5);
+      rect(windowWidth / 2 - 400, windowHeight / 2 + 250, 800, 150, 5);
     }
   }
   hide() {
@@ -19,7 +19,7 @@ class Texto {
     this.texts = texts;
     this.x = windowWidth / 2 - 380;
     // this.x = 380;
-    this.y = 500;
+    this.y = 680;
     this.w = 760;
     this.h = 110;
     this.visible = true;
